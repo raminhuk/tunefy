@@ -1,30 +1,27 @@
 import React from 'react';
 
 interface HeaderProps {
-  onLoginClick?: () => void;
+    onLoginClick?: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
-  return (
-    <header className="bg-blue-950 text-white">
-      <div className="container mx-auto flex justify-between items-center p-4">
-        <div className="flex items-center h-10 w-20 mr-2">
-          <img src="../tunefy-logo.svg" alt="Logo"/>
-        </div>
-        <nav className="space-x-6">
-          <a href="#" className="hover:text-gray-400">Principal</a>
-          <a href="#" className="hover:text-gray-400">Sobre</a>
-          <a href="#" className="hover:text-gray-400">Política de Privacidade</a>
-          <a href="#" className="hover:text-gray-400">Contato</a>
-        </nav>
-        <button
-          className="bg-blue-900 hover:bg-blue-800 text-white px-4 py-2 rounded"
-        >
-          Login
-        </button>
-      </div>
-    </header>
-  );
+    return (
+        <header className="fixed top-0 left-0 right-0 text-white">
+            <div className="max-w-7xl w-11/12 mx-auto flex justify-between items-center">
+                <div className="flex items-center h-auto w-28 mr-2">
+                    <a href="/">
+                        <img className="h-auto w-28" src="../tunefy-logo.svg" alt="Logo" />
+                    </a>
+                </div>
+                <nav className="flex">
+                    <a href="/" className="px-6 py-8 hover:text-gray-400">Principal</a>
+                    <a href="/sobre" className="px-6 py-8 hover:text-gray-400">Sobre</a>
+                    <a href="/politica" className="px-6 py-8 hover:text-gray-400">Política de Privacidade</a>
+                    <a href="/contato" className="px-6 py-8 hover:text-gray-400">Contato</a>
+                </nav>
+            </div>
+        </header>
+    );
 };
 
 export default Header;
