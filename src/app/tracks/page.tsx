@@ -10,6 +10,7 @@ export default function Tracks() {
 
     if (!accessToken) {
         window.location.href = '/'
+        return
     }
     useEffect(() => {
         const getTopTracks = async () => {
