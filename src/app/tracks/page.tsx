@@ -8,11 +8,13 @@ export default function Tracks() {
 
     const accessToken = localStorage.getItem('access_token') ?? false;
 
-    if (!accessToken) {
-        window.location.href = '/'
-        return
-    }
+    
     useEffect(() => {
+        if (!accessToken) {
+            window.location.href = '/'
+            return
+        }
+
         const getTopTracks = async () => {
             const response = await axios.get(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}`, {
                 headers: {
