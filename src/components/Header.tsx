@@ -6,7 +6,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
     return (
-        <header className="fixed top-0 left-0 right-0 text-white">
+        <header className="text-white">
             <div className="max-w-7xl w-11/12 mx-auto flex justify-between items-center">
                 <div className="flex items-center h-auto w-28 mr-2">
                     <a href="/">

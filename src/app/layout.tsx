@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import Header from '../components/Header'
 
-const poppins = Poppins({ 
+const poppins = Poppins({
     weight: ['200', '400', '600', '800'],
     subsets: ['latin'],
 })
@@ -21,7 +21,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`min-h-screen ${poppins.className}`}>
-                <Header/>
+                <Header />
                 {children}
             </body>
         </html>
