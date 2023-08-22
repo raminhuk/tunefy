@@ -6,27 +6,27 @@ export default function Tracks() {
     const [topTracks, setTopTracks] = useState<any[]>([]);
     const [timeRange, setTimeRange] = useState<string>('short_term');
 
-    const accessToken = localStorage.getItem('access_token') ?? false;
-
+    
     
     useEffect(() => {
-        if (!accessToken) {
-            window.location.href = '/'
-            return
+        const accessToken = localStorage.getItem('access_token') ?? false;
+        if (accessToken) {
+            // window.location.href = '/'
+            // return
+            const getTopTracks = async () => {
+                const response = await axios.get(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}`, {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                });
+    
+                setTopTracks(response.data.items);
+            };
+            getTopTracks();
         }
 
-        const getTopTracks = async () => {
-            const response = await axios.get(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}`, {
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                }
-            });
 
-            setTopTracks(response.data.items);
-        };
-
-        getTopTracks();
-    }, [accessToken, timeRange]);
+    }, [timeRange]);
 
     const handleTimeRangeChange = (newTimeRange: string) => {
         setTimeRange(newTimeRange);
