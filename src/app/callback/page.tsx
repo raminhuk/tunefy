@@ -1,11 +1,7 @@
 'use client';
 import React, { useEffect } from 'react';
 
-type CallbackPageProps = {
-    setAccessToken: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const CallbackPage = ({ setAccessToken }: CallbackPageProps) => {
+export default function CallbackPage() {
 
     useEffect(() => {
         const hashParams = new URLSearchParams(window.location.hash.substr(1));
@@ -21,5 +17,3 @@ const CallbackPage = ({ setAccessToken }: CallbackPageProps) => {
         <div>Autenticando...</div>
     );
 };
-
-export default CallbackPage;
