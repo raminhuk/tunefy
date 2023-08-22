@@ -2,11 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function Traks() {
+export default function Tracks() {
     const [topTracks, setTopTracks] = useState<any[]>([]);
     const [timeRange, setTimeRange] = useState<string>('short_term');
 
-    const accessToken = localStorage.getItem('access_token');
+    const accessToken = localStorage.getItem('access_token') ?? false;
+
+    if (!accessToken) {
+        window.location.href = '/'
+    }
     useEffect(() => {
         const getTopTracks = async () => {
             const response = await axios.get(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}`, {
