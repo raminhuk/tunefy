@@ -1,7 +1,7 @@
 export default function Contato() {
   return (
     <>
-        <div>contato</div>
+        <div>recently</div>
     </>
   )
 }
