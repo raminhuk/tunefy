@@ -12,23 +12,23 @@ export default function Tracks() {
     useEffect(() => {
         const accessToken = localStorage.getItem('access_token') ?? false;
         if (accessToken) {
-          const getTopTracks = async () => {
-            try {
-              const response = await axios.get<any>(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}`, {
-                headers: {
-                  'Authorization': `Bearer ${accessToken}`
+            const getTopTracks = async () => {
+                try {
+                    const response = await axios.get<any>(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}`, {
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`
+                        }
+                    });
+
+                    setTopTracks(response.data.items);
+                } catch (error: any) {
+                    localStorage.removeItem('access_token');
+                    alert('expired token');
                 }
-              });
-    
-              setTopTracks(response.data.items);
-            } catch (error: any) {
-                localStorage.removeItem('access_token');
-                alert('expired token');
-            }
-          };
-          getTopTracks();
+            };
+            getTopTracks();
         }
-      }, [timeRange]);
+    }, [timeRange]);
 
     const handleTimeRangeChange = (newTimeRange: string) => {
         setTimeRange(newTimeRange);
@@ -63,7 +63,7 @@ export default function Tracks() {
                 <ul className="space-y-2">
                     {topTracks.map(track => (
                         <li key={track.id} className="bg-black bg-opacity-25 shadow-md p-4 rounded-md flex space-y-1 items-center gap-4">
-                            <Image className="h-auto" style={{maxWidth: '60px'}} alt={track.artists[0].name} src={track.album.images[0].url} width={track.album.images[0].width} height={track.album.images[0].height}/>
+                            <Image className="h-auto" style={{ maxWidth: '60px' }} alt={track.artists[0].name} src={track.album.images[0].url} width={track.album.images[0].width} height={track.album.images[0].height} />
                             <div className="flex flex-col">
                                 <span className="text-gray-100 font-semibold">{track.name}</span>
                                 <span className="text-gray-300 text-sm">{track.artists[0].name}</span>
