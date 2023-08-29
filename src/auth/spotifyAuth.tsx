@@ -8,8 +8,7 @@ interface SpotifyAuthProps {
 const SCOPES: string[] = ['user-top-read'];
 
 const SpotifyAuth: React.FC<SpotifyAuthProps> = ({ children }) => {
-    const token = localStorage.getItem('access_token');
-
+    const token = localStorage.getItem('access_token') ?? false
     useEffect(() => {
         if (token) {
             return;
