@@ -1,8 +1,8 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import SpotifyAuth from '../../auth/spotifyAuth';
 import Image from 'next/image';
+import spotifyToken from '../../services/auth/spotifyToken';
 
 export default function Tracks() {
     const [topTracks, setTopTracks] = useState<any[]>([]);
@@ -10,7 +10,7 @@ export default function Tracks() {
     console.log(topTracks);
 
     useEffect(() => {
-        const accessToken = localStorage.getItem('access_token') ?? false;
+        const accessToken = spotifyToken();
         if (accessToken) {
             const getTopTracks = async () => {
                 try {
@@ -35,7 +35,7 @@ export default function Tracks() {
     };
 
     return (
-        <SpotifyAuth>
+        <div>
             <div className="max-w-7xl w-11/12 mx-auto mt-8">
                 <div className="text-center max-w-7xl mx-auto space-y-2">
                     <h2 className="text-2xl font-bold mb-4">Músicas mais ouvidas</h2>
@@ -72,7 +72,7 @@ export default function Tracks() {
                     ))}
                 </ul>
             </div>
-        </SpotifyAuth>
+        </div>
 
     );
 }
