@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import spotifyToken from '../../services/auth/spotifyToken';
+import { spotifyToken } from '../../services/auth/spotifyToken';
+import api from '../../services/api/api';
 
 export default function Tracks() {
     const [topTracks, setTopTracks] = useState<any[]>([]);
@@ -14,16 +15,12 @@ export default function Tracks() {
         if (accessToken) {
             const getTopTracks = async () => {
                 try {
-                    const response = await axios.get<any>(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}`, {
-                        headers: {
-                            'Authorization': `Bearer ${accessToken}`
-                        }
-                    });
+                    const response = await api(`me/top/tracks?time_range=${timeRange}`);
 
                     setTopTracks(response.data.items);
                 } catch (error: any) {
                     localStorage.removeItem('access_token');
-                    alert('expired token');
+                    console.log(error)
                 }
             };
             getTopTracks();

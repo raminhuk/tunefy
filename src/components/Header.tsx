@@ -1,6 +1,8 @@
 import { Nunito_Sans } from 'next/font/google';
 import Image from 'next/image';
 import React from 'react';
+import User from './User';
+
 
 const nunito = Nunito_Sans({
     weight: ['200', '400', '600', '800'],
@@ -12,7 +14,6 @@ interface HeaderProps {
 }
 
 export function Header() {
-
     return (
         <header className="text-white">
             <div className="max-w-7xl w-11/12 mx-auto flex justify-between items-center">
@@ -31,19 +32,7 @@ export function Header() {
 
                 </nav>
 
-                <div className="flex items-center gap-3 text-xs">
-                    <span>Olá, Fabio J Raminhuk</span>
-                    <div className="w-10 h-10 rounded-full overflow-hidden">
-                        <Image 
-                            src="https://i.scdn.co/image/ab6775700000ee856de4085b5aee4d83f833ad6e" 
-                            alt="Fabio"
-                            width={30}
-                            height={30}
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                    <p className="text-lg"></p>
-                </div>
+                <User/>
             </div>
         </header>
     );
