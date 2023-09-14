@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 
-export const getSpotifyToken = () => localStorage.getItem('access_token') !== null;
+// export const getSpotifyToken = () => localStorage.getItem('access_token') !== null;
 
 export function spotifyToken() {
     if (typeof window !== 'undefined') {

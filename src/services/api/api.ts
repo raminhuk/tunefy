@@ -1,17 +1,17 @@
 import axios from 'axios'
-import { getSpotifyToken, spotifyToken } from '../auth/spotifyToken'
+import { spotifyToken } from '../auth/spotifyToken'
 
 interface Credentials {
     baseURL: string
     headers?: {}
 }
 
-const token = spotifyToken();
+// const token = spotifyToken();
 
 const apiCredentials:Credentials = {
     baseURL: `https://api.spotify.com/v1/`,
     headers: {
-        'authorization': `Bearer ${token}`
+        'authorization': `Bearer ${spotifyToken()}`
     }
 }
 const api = axios.create(apiCredentials)

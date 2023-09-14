@@ -20,6 +20,7 @@ export default function Tracks() {
                     setTopTracks(response.data.items);
                 } catch (error: any) {
                     localStorage.removeItem('access_token');
+                    spotifyToken();
                     console.log(error)
                 }
             };
