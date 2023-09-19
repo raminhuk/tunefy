@@ -1,31 +1,26 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Image from 'next/image';
-import { spotifyToken } from '../../services/auth/spotifyToken';
 import api from '../../services/api/api';
+import { useRouter } from 'next/navigation'
 
 export default function Tracks() {
     const [topTracks, setTopTracks] = useState<any[]>([]);
     const [timeRange, setTimeRange] = useState<string>('short_term');
-    console.log(topTracks);
+    const router = useRouter()
 
     useEffect(() => {
-        const accessToken = spotifyToken();
-        if (accessToken) {
-            const getTopTracks = async () => {
-                try {
-                    const response = await api(`me/top/tracks?time_range=${timeRange}`);
-
-                    setTopTracks(response.data.items);
-                } catch (error: any) {
-                    localStorage.removeItem('access_token');
-                    spotifyToken();
-                    console.log(error)
-                }
-            };
-            getTopTracks();
-        }
+        const getTopTracks = async () => {
+            try {
+                const response = await api(`me/top/tracks?time_range=${timeRange}`);
+                setTopTracks(response.data.items);
+            } catch (error: any) {
+                localStorage.removeItem('access_token');
+                router.push('/login');
+                console.log(error)
+            }
+        };
+        getTopTracks();
     }, [timeRange]);
 
     const handleTimeRangeChange = (newTimeRange: string) => {

@@ -1,15 +1,18 @@
 'use client'
 import { useEffect, useState } from "react";
-import api from "../services/api/api";
 import Image from "next/image";
 import axios from "axios";
 import { } from "react-icons";
 import { BiUser } from "react-icons/bi";
 import Link from "next/link";
+import { useUserStore } from "../store/user";
+import api from "../services/api/api";
+
 export default function User() {
-    const [user, setUser] = useState<any>();
+    const { user, setUser } = useUserStore();
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -21,40 +24,23 @@ export default function User() {
 
 
     useEffect(() => {
-        const token = localStorage?.getItem('access_token') || null;
-        async function getUserData() {
-            const baseURL = 'https://api.spotify.com/v1/';
-
-            const headers = {
-                'Authorization': `Bearer ${token}`
-            };
-
+        const getUserData = async () => {
             try {
-                const response = await axios.get(`${baseURL}me`, { headers });
-
-                // Verifica se a solicitação foi bem-sucedida
-                if (response.status === 200) {
-                    setUser(response.data);
-                } else {
-                    throw new Error('Falha ao buscar os dados do usuário do Spotify');
-                }
+                const response = await api(`me`);
+                setUser(response.data);
             } catch (error: any) {
-                if (error.response) {
-                    console.error('Erro ao buscar os dados do usuário:', error?.response?.data);
-                }
+                localStorage.removeItem('access_token');
+                console.log(error)
             }
-        }
-
-        if (token) {
-            getUserData();
-        }
+        };
+        getUserData();
     }, []);
     return (
         <>
             <div className="cursor-pointer relative rounded-full -outline-offset-1 hover:outline-2 hover:outline hover:outline-gray-400 " onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
                 <div className="flex rounded-full overflow-hidden items-center gap-3 text-xs">
                     <div className="w-10 h-10">
-                        {user?.images[0] ? (
+                        {user ? (
                             <Image
                                 src={user.images[0].url}
                                 alt={user.display_name}
@@ -82,13 +68,13 @@ export default function User() {
                                 </li>
                                 <li>
                                     {user ? (
-                                        <a className="flex px-3 py-2 hover:bg-gray-200" href="/" onClick={() => {localStorage.removeItem('access_token')}}>
+                                        <a className="flex px-3 py-2 hover:bg-gray-200" href="/" onClick={() => { localStorage.removeItem('access_token') }}>
                                             Logout
                                         </a>
                                     ) : (
                                         <Link className="flex px-3 py-2 hover:bg-gray-200" href="/tracks">
                                             Login
-                                        </Link> 
+                                        </Link>
                                     )}
                                 </li>
                             </ul>
