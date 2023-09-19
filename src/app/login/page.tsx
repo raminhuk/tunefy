@@ -14,15 +14,14 @@ const LoginPage = () => {
         scope: SCOPES.join(' '),
     });
 
-    useEffect(() => {
-        const token = getSpotifyAccessToken();
+    const token = getSpotifyAccessToken();
 
-        if (token) {
-            router.push('/tracks');
-        } else {
-            window.location.href = `https://accounts.spotify.com/authorize?${params}`;
-        }
-    }, []);
+    if (token !== null) {
+        router.push('/tracks');
+    } else {
+        window.location.href = `https://accounts.spotify.com/authorize?${params}`;
+    }
+    
 
     return <div>Autenticando...</div>;
 };

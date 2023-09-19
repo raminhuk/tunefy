@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import api from '../../services/api/api';
 import { useRouter } from 'next/navigation'
+import { FaSpotify } from 'react-icons/fa';
 
 export default function Tracks() {
     const [topTracks, setTopTracks] = useState<any[]>([]);
@@ -15,8 +16,7 @@ export default function Tracks() {
                 const response = await api(`me/top/tracks?time_range=${timeRange}`);
                 setTopTracks(response.data.items);
             } catch (error: any) {
-                localStorage.removeItem('access_token');
-                router.push('/login');
+                // router.push('/login');
                 console.log(error)
             }
         };
@@ -53,6 +53,7 @@ export default function Tracks() {
                         </button>
                     </div>
                 </div>
+                {topTracks.length > 0 ? (
                 <ul className="space-y-2">
                     {topTracks.map(track => (
                         <li key={track.id} className="bg-black bg-opacity-25 shadow-md p-4 rounded-md flex space-y-1 items-center gap-4">
@@ -64,6 +65,17 @@ export default function Tracks() {
                         </li>
                     ))}
                 </ul>
+                ) : (
+                    <div className='flex items-center justify-center p-20'>
+                        <button
+                            onClick={() => {router.push('/login')}}
+                            className="flex items-center gap-2 bg-green-500 text-black rounded-full px-8 py-3 border-b-4 border-b-green-700 border-em hover:bg-green-600"
+                        >
+                            <FaSpotify size="1.2em"/>
+                            Login Spotify
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
 
