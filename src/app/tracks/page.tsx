@@ -1,30 +1,56 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import api from '../../services/api/api';
 import { useRouter } from 'next/navigation'
-import { FaSpotify } from 'react-icons/fa';
+import { useTracksStore } from '../../store/tracksStore';
+import api from '../../libs/api';
+import { Track } from '../../@types/types';
 
 export default function Tracks() {
-    const [topTracks, setTopTracks] = useState<any[]>([]);
+    const { topTracks, setTopTracks } = useTracksStore();
+    const timeRanges: string[] = ['short_term', 'medium_term', 'long_term'];
     const [timeRange, setTimeRange] = useState<string>('short_term');
+
     const router = useRouter()
 
-    useEffect(() => {
-        const getTopTracks = async () => {
-            try {
-                const response = await api(`me/top/tracks?time_range=${timeRange}`);
-                setTopTracks(response.data.items);
-            } catch (error: any) {
-                // router.push('/login');
-                console.log(error)
+    async function fetchTopTracks() {
+
+        try {
+            const requests = timeRanges.map(timeRange => api(`me/top/tracks?time_range=${timeRange}`));
+
+            const responses = await Promise.all(requests);
+            // const topTracksData2: any = responses.map((response, key) => ({ [`teste${key}`]: response?.data.items }));
+            // console.log(topTracksData2);
+
+            const topTracksData: Record<string, any> = {};
+            responses.forEach((response, index) => {
+                topTracksData[timeRanges[index]] = response.data.items;
+            });
+
+            setTopTracks(topTracksData);
+
+        } catch (error: any) {
+            const contError = localStorage.getItem('error') || 0;
+            localStorage.setItem('error', String((Number(contError) + 1)));
+
+            if (Number(contError) < 3) {
+                localStorage.removeItem('access_token');
+                router.push('/login');
             }
-        };
-        getTopTracks();
-    }, [timeRange]);
+            if (error.response) {
+                console.log(error.response.data);
+            }
+        }
+    }
+
+
+    useEffect(() => {
+        fetchTopTracks()
+    }, []);
+    // console.log(topTracksData2);
 
     const handleTimeRangeChange = (newTimeRange: string) => {
-        setTimeRange(newTimeRange);
+        setTimeRange(newTimeRange)
     };
 
     return (
@@ -53,29 +79,22 @@ export default function Tracks() {
                         </button>
                     </div>
                 </div>
-                {topTracks.length > 0 ? (
-                <ul className="space-y-2">
-                    {topTracks.map(track => (
-                        <li key={track.id} className="bg-black bg-opacity-25 shadow-md p-4 rounded-md flex space-y-1 items-center gap-4">
-                            <Image className="h-auto" style={{ maxWidth: '60px' }} alt={track.artists[0].name} src={track.album.images[0].url} width={track.album.images[0].width} height={track.album.images[0].height} />
-                            <div className="flex flex-col">
-                                <span className="text-gray-100 font-semibold">{track.name}</span>
-                                <span className="text-gray-300 text-sm">{track.artists[0].name}</span>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-                ) : (
-                    <div className='flex items-center justify-center p-20'>
-                        <button
-                            onClick={() => {router.push('/login')}}
-                            className="flex items-center gap-2 bg-green-500 text-black rounded-full px-8 py-3 border-b-4 border-b-green-700 border-em hover:bg-green-600"
-                        >
-                            <FaSpotify size="1.2em"/>
-                            Login Spotify
-                        </button>
+                {timeRanges.map((time) => (
+                    <div key={time} className="none" style={time === timeRange ? { display: 'block' } : { display: 'none' }}>
+                        <ul>
+                            {topTracks?.[time]?.map((track: Track) => (
+                                <li key={track.id} className="bg-black bg-opacity-25 shadow-md p-4 rounded-md flex space-y-1 items-center gap-4">
+                                    <Image className="h-auto" style={{ maxWidth: '60px' }} alt={track.artists[0].name} src={track.album.images[0].url} width={track.album.images[0].width} height={track.album.images[0].height} />
+                                    <div className="flex flex-col">
+                                        <span className="text-gray-100 font-semibold">{track.name}</span>
+                                        <span className="text-gray-300 text-sm">{track.artists[0].name}</span>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                )}
+                ))}
+
             </div>
         </div>
 

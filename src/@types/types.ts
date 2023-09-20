@@ -12,12 +12,18 @@ export interface SpotifyUser {
     }[];
 }
 
-export type Track = {
+export interface Track {
+    id: string;
     name: string;
-    artist: string;
-    albumImageUrl: string;
-    spotifyTrackUrl: string;
-};
+    artists: { name: string }[];
+    album: {
+      images: {
+        url: string;
+        width: number;
+        height: number;
+      }[];
+    };
+  }
 
 export type Artist = {
     name: string;

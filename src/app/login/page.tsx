@@ -17,7 +17,7 @@ const LoginPage = () => {
     useEffect(() => {
         const token = getSpotifyAccessToken();
 
-        if (token !== null) {
+        if (token) {
             router.push('/tracks');
         } else {
             window.location.href = `https://accounts.spotify.com/authorize?${params}`;

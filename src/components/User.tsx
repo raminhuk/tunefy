@@ -5,8 +5,9 @@ import axios from "axios";
 import { } from "react-icons";
 import { BiUser } from "react-icons/bi";
 import Link from "next/link";
-import { useUserStore } from "../store/user";
-import api from "../services/api/api";
+import { getSpotifyAccessToken } from "../auth/spotifyToken";
+import { useUserStore } from "../store/userStore";
+import api from "../libs/api";
 
 export default function User() {
     const { user, setUser } = useUserStore();
@@ -24,16 +25,20 @@ export default function User() {
 
 
     useEffect(() => {
-        const getUserData = async () => {
-            try {
-                const response = await api(`me`);
-                setUser(response.data);
-            } catch (error: any) {
-                localStorage.removeItem('access_token');
-                console.log(error)
-            }
-        };
-        getUserData();
+        const token = getSpotifyAccessToken();
+
+        if (token) {
+            const getUserData = async () => {
+                try {
+                    const response = await api(`me`);
+                    setUser(response.data);
+                } catch (error: any) {
+                    localStorage.removeItem('access_token');
+                    console.log(error)
+                }
+            };
+            getUserData();
+        }
     }, []);
     return (
         <>

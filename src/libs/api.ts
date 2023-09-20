@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getSpotifyAccessToken } from '../../auth/spotifyToken';
+import { getSpotifyAccessToken } from '../auth/spotifyToken';
 
 interface Credentials {
   baseURL: string;
