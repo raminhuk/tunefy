@@ -14,31 +14,32 @@ export default function Tracks() {
     const router = useRouter()
 
     async function fetchTopTracks() {
-
-        try {
-            const requests = timeRanges.map(timeRange => api(`me/top/tracks?time_range=${timeRange}`));
-
-            const responses = await Promise.all(requests);
-            // const topTracksData2: any = responses.map((response, key) => ({ [`teste${key}`]: response?.data.items }));
-            // console.log(topTracksData2);
-
-            const topTracksData: Record<string, any> = {};
-            responses.forEach((response, index) => {
-                topTracksData[timeRanges[index]] = response.data.items;
-            });
-
-            setTopTracks(topTracksData);
-
-        } catch (error: any) {
-            const contError = localStorage.getItem('error') || 0;
-            localStorage.setItem('error', String((Number(contError) + 1)));
-
-            if (Number(contError) < 3) {
-                localStorage.removeItem('access_token');
-                router.push('/login');
-            }
-            if (error.response) {
-                console.log(error.response.data);
+        if (!topTracks){
+            try {
+                const requests = timeRanges.map(timeRange => api(`me/top/tracks?time_range=${timeRange}`));
+    
+                const responses = await Promise.all(requests);
+                // const topTracksData2: any = responses.map((response, key) => ({ [`teste${key}`]: response?.data.items }));
+                // console.log(topTracksData2);
+    
+                const topTracksData: Record<string, any> = {};
+                responses.forEach((response, index) => {
+                    topTracksData[timeRanges[index]] = response.data.items;
+                });
+    
+                setTopTracks(topTracksData);
+    
+            } catch (error: any) {
+                const contError = localStorage.getItem('error') || 0;
+                localStorage.setItem('error', String((Number(contError) + 1)));
+    
+                if (Number(contError) < 3) {
+                    localStorage.removeItem('access_token');
+                    router.push('/login');
+                }
+                if (error.response) {
+                    console.log(error.response.data);
+                }
             }
         }
     }
