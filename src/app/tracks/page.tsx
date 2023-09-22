@@ -9,35 +9,58 @@ import { Track } from '../../@types/types';
 import WebPlayback from '../../components/WebPlayback';
 import { getSpotifyAccessToken } from '../../auth/spotifyToken';
 
+interface IFrameAPI {
+    createController(
+        element: HTMLElement | null,
+        options: {
+            width: string;
+            height: string;
+            uri: string;
+        },
+        callback: (EmbedController: EmbedController) => void
+    ): void;
+}
+
+interface EmbedController {
+    loadUri(uri: string): void;
+    play(): void;
+}
+
+declare global {
+    interface Window {
+        onSpotifyIframeApiReady: (IFrameAPI: IFrameAPI) => void;
+    }
+}
+
 export default function Tracks() {
     const { topTracks, setTopTracks } = useTracksStore();
     const timeRanges: string[] = ['short_term', 'medium_term', 'long_term'];
     const [timeRange, setTimeRange] = useState<string>('short_term');
-    const [idTrack, setidTrack] = useState<string>('');
+    const [idTrack, setIdTrack] = useState<string | null>(null);
 
 
     const router = useRouter()
 
     async function fetchTopTracks() {
-        if (!topTracks){
+        if (!topTracks) {
             try {
                 const requests = timeRanges.map(timeRange => api(`me/top/tracks?time_range=${timeRange}`));
-    
+
                 const responses = await Promise.all(requests);
                 // const topTracksData2: any = responses.map((response, key) => ({ [`teste${key}`]: response?.data.items }));
                 // console.log(topTracksData2);
-    
+
                 const topTracksData: Record<string, any> = {};
                 responses.forEach((response, index) => {
                     topTracksData[timeRanges[index]] = response.data.items;
                 });
-    
+
                 setTopTracks(topTracksData);
-    
+
             } catch (error: any) {
                 const contError = localStorage.getItem('error') || 0;
                 localStorage.setItem('error', String((Number(contError) + 1)));
-    
+
                 if (Number(contError) < 3) {
                     localStorage.removeItem('access_token');
                     router.push('/login');
@@ -49,8 +72,29 @@ export default function Tracks() {
         }
     }
 
+    const [embedController, setEmbedController] = useState<EmbedController | null>(null);
+
     useEffect(() => {
         fetchTopTracks()
+
+        const script = document.createElement("script");
+        script.src = "https://open.spotify.com/embed-podcast/iframe-api/v1";
+        script.async = true;
+
+        document.body.appendChild(script);
+
+        window.onSpotifyIframeApiReady = (IFrameAPI) => {
+            const element = document.getElementById('embed-iframe');
+            const options = {
+                width: '100%',
+                height: '100',
+                uri: 'spotify:episode:7makk4oTQel546B0PZlDM5',
+            };
+            const callback = (EmbedController: EmbedController) => {
+                setEmbedController(EmbedController);
+            };
+            IFrameAPI.createController(element, options, callback);
+        };
     }, []);
 
     console.log(topTracks)
@@ -59,10 +103,23 @@ export default function Tracks() {
     };
 
     const handleTrack = (id: string) => {
+        setIdTrack(id)
+        if (embedController) {
+            embedController.loadUri(`spotify:track:${id}`);
+            embedController.play();
+        }
     };
 
     return (
         <div>
+            <div>
+                <div>
+                    {/* <iframe width="100%" height="152" title="Spotify Embed: My Path to Spotify: Women in Engineering" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" src="https://open.spotify.com/embed/track/0wokCRaKD0zPNhMRXAgVsr?utm_source=oembed"></iframe> */}
+                </div>
+                <div className="fixed bottom-0 w-full h-20" style={idTrack !== null ? { display: 'block' } : { display: 'none' }}>
+                    <div id="embed-iframe"></div>
+                </div>
+            </div>
             <div className="max-w-7xl w-11/12 mx-auto mt-8">
                 <div className="text-center max-w-7xl mx-auto space-y-2">
                     <h2 className="text-2xl font-bold mb-4">Músicas mais ouvidas</h2>
@@ -99,7 +156,7 @@ export default function Tracks() {
                                             <span className="text-gray-300 text-sm">{track.artists[0].name}</span>
                                         </div>
                                     </div>
-                                    <button onClick={() => {setidTrack(track.id)}}>
+                                    <button onClick={() => { handleTrack(track.id) }}>
                                         <BsPlayCircle size={28} />
                                     </button>
                                 </li>
@@ -107,9 +164,9 @@ export default function Tracks() {
                         </ul>
                     </div>
                 ))}
-                <div>
+                {/* <div>
                   <WebPlayback token={getSpotifyAccessToken() || ''}/>
-                </div>
+                </div> */}
 
             </div>
         </div>
