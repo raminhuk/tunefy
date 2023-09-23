@@ -24,7 +24,7 @@ export function Header() {
 
     return (
         <header className="text-white">
-            <div className="max-w-7xl w-11/12 mx-auto flex justify-between lg:flex-row justify-center lg:justify-between items-center lg:items-center py-3">
+            <div className="py-3 max-w-7xl w-11/12 mx-auto flex justify-between lg:flex-row justify-center lg:justify-between items-center lg:items-center lg:py-0" >
                 <div className="flex items-center">
                     <Link href="/" className="flex items-center gap-2">
                         <h1 className={`text-transparent bg-gradient-to-r from-customPink via-customPink2 to-customBlue bg-clip-text font-extrabold text-2xl tracking-widest ${nunito.className}`}>TUNEFY</h1>
@@ -32,7 +32,7 @@ export function Header() {
                     </Link>
                 </div>
 
-                <div className="lg:hidden flex items-center">
+                <div className="lg:hidden -order-1 flex items-center">
                     <button onClick={toggleMobileMenu} className="text-white p-2 focus:outline-none">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             {isMobileMenuOpen ? (
