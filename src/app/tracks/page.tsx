@@ -2,12 +2,12 @@
 import React, { MouseEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation'
-import { BsPlayCircle, BsPlayCircleFill } from "react-icons/bs";
+import { BsPauseCircleFill, BsPlayCircleFill } from "react-icons/bs";
+import { MdDragHandle } from "react-icons/md";
 import { useTracksStore } from '../../store/tracksStore';
 import api from '../../libs/api';
 import { Track } from '../../@types/types';
-import WebPlayback from '../../components/WebPlayback';
-import { getSpotifyAccessToken } from '../../auth/spotifyToken';
+import Draggable from 'react-draggable';
 
 interface IFrameAPI {
     createController(
@@ -24,6 +24,7 @@ interface IFrameAPI {
 interface EmbedController {
     loadUri(uri: string): void;
     play(): void;
+    togglePlay(): void;
 }
 
 declare global {
@@ -37,6 +38,10 @@ export default function Tracks() {
     const timeRanges: string[] = ['short_term', 'medium_term', 'long_term'];
     const [timeRange, setTimeRange] = useState<string>('short_term');
     const [idTrack, setIdTrack] = useState<string | null>(null);
+    const [isPlay, setPlay] = useState<boolean>(false);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+
+
 
 
     const router = useRouter()
@@ -44,18 +49,18 @@ export default function Tracks() {
     async function fetchTopTracks() {
         if (!topTracks) {
             try {
-                const requests = timeRanges.map(timeRange => api(`me/top/tracks?time_range=${timeRange}`));
+                const topTracksDataByTimeRange: Record<string, any> = {};
 
-                const responses = await Promise.all(requests);
-                // const topTracksData2: any = responses.map((response, key) => ({ [`teste${key}`]: response?.data.items }));
-                // console.log(topTracksData2);
+                await Promise.all(
+                    timeRanges.map(async (timeRange) => {
+                        const response = await api(`me/top/tracks?time_range=${timeRange}`);
+                        topTracksDataByTimeRange[timeRange] = response?.data.items;
+                    })
+                );
 
-                const topTracksData: Record<string, any> = {};
-                responses.forEach((response, index) => {
-                    topTracksData[timeRanges[index]] = response.data.items;
-                });
-
-                setTopTracks(topTracksData);
+                setTopTracks(topTracksDataByTimeRange);
+                console.log(topTracksDataByTimeRange);
+                localStorage.removeItem('error');
 
             } catch (error: any) {
                 const contError = localStorage.getItem('error') || 0;
@@ -88,7 +93,7 @@ export default function Tracks() {
             const options = {
                 width: '100%',
                 height: '100',
-                uri: 'spotify:episode:7makk4oTQel546B0PZlDM5',
+                uri: '',
             };
             const callback = (EmbedController: EmbedController) => {
                 setEmbedController(EmbedController);
@@ -103,12 +108,20 @@ export default function Tracks() {
     };
 
     const handleTrack = (id: string) => {
-        setIdTrack(id)
-        if (embedController) {
-            embedController.loadUri(`spotify:track:${id}`);
-            embedController.play();
+        if (idTrack === id) {
+            embedController?.togglePlay();
+            setPlay(!isPlay)
+        } else {
+            setIdTrack(id)
+            embedController?.loadUri(`spotify:track:${id}`);
+            embedController?.play();
+            setPlay(true)
         }
     };
+
+    const trackPos = (data:any) => {
+        setPosition({ x: data.x, y: data.y });
+     };
 
     return (
         <div>
@@ -116,8 +129,16 @@ export default function Tracks() {
                 <div>
                     {/* <iframe width="100%" height="152" title="Spotify Embed: My Path to Spotify: Women in Engineering" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" src="https://open.spotify.com/embed/track/0wokCRaKD0zPNhMRXAgVsr?utm_source=oembed"></iframe> */}
                 </div>
-                <div className="fixed bottom-0 w-full h-20" style={idTrack !== null ? { display: 'block' } : { display: 'none' }}>
-                    <div id="embed-iframe"></div>
+                <div className="absolute bottom-0 right-4" style={idTrack !== null ? { display: 'block' } : { display: 'none' }}>
+                    <Draggable>
+                        <div className="flex flex-col">
+                            <span className="flex flex-col items-center justify-items-center rounded-t-md bg-gray-800 w-12 p-0.5 pt-1.5 ml-2 cursor-move" id="handle">
+                                <span className="w-6 h-px bg-gray-500 mb-0.5"></span>
+                                <span className="w-6 h-px bg-gray-500 mb-0.5"></span>
+                            </span>
+                            <div className="bg-gray-800 h-20 w-full flex" id="embed-iframe"></div>
+                        </div>
+                    </Draggable>
                 </div>
             </div>
             <div className="max-w-7xl w-11/12 mx-auto mt-8">
@@ -157,7 +178,11 @@ export default function Tracks() {
                                         </div>
                                     </div>
                                     <button onClick={() => { handleTrack(track.id) }}>
-                                        <BsPlayCircle size={28} />
+                                        {idTrack === track.id && isPlay ? (
+                                            <BsPauseCircleFill size={30} />
+                                        ) : (
+                                            <BsPlayCircleFill size={30} />
+                                        )}
                                     </button>
                                 </li>
                             ))}

@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import axios from "axios";
 import { } from "react-icons";
 import { BiUser } from "react-icons/bi";
 import Link from "next/link";
@@ -11,9 +10,7 @@ import api from "../libs/api";
 
 export default function User() {
     const { user, setUser } = useUserStore();
-
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -22,7 +19,6 @@ export default function User() {
     const closeDropdown = () => {
         setIsDropdownOpen(false);
     };
-
 
     useEffect(() => {
         const token = getSpotifyAccessToken();
