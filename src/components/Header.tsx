@@ -45,11 +45,11 @@ export function Header() {
                 </div>
 
                 <nav className={`fixed lg:flex lg:relative ${isMobileMenuOpen ? 'flex flex-col top-16 bg-gray-800 left-0 w-full' : 'hidden'}`}>
-                    <Link href="/" className="lg:px-6 py-8 px-4 hover:text-gray-400">Home</Link>
-                    <Link href="/tracks" className="lg:px-6 py-8 px-4 hover:text-gray-400">Top Tracks</Link>
-                    <Link href="/artists" className="lg:px-6 py-8 px-4 hover:text-gray-400">Top Artists</Link>
-                    <Link href="/genres" className="lg:px-6 py-8 px-4 hover:text-gray-400">Top Genres</Link>
-                    <Link href="/recently" className="lg:px-6 py-8 px-4 hover:text-gray-400">Recently Played</Link>
+                    <Link href="/" className="lg:px-6 py-8 px-4 hover:text-gray-400">Principal</Link>
+                    <Link href="/tracks" className="lg:px-6 py-8 px-4 hover:text-gray-400">Top Músicas</Link>
+                    <Link href="/artists" className="lg:px-6 py-8 px-4 hover:text-gray-400">Top Artistas</Link>
+                    <Link href="/genres" className="lg:px-6 py-8 px-4 hover:text-gray-400">Top Generos</Link>
+                    <Link href="/recently" className="lg:px-6 py-8 px-4 hover:text-gray-400">Últimas Ouvidas</Link>
                 </nav>
 
                 <User/>
