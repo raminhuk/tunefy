@@ -1,4 +1,4 @@
-export default function Sobre() {
+export default function Artist() {
   return (
     <>
         <div>artist</div>

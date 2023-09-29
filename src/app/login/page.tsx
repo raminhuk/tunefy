@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 const LoginPage = () => {
     const router = useRouter();
 
-    const SCOPES = ['user-top-read', 'streaming', 'user-read-email', 'user-read-private'];
+    const SCOPES = ['user-top-read', 'streaming', 'user-read-email', 'user-read-private, playlist-modify-public, playlist-modify-private'];
     const params = new URLSearchParams({
         response_type: 'token',
         client_id: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID || '',

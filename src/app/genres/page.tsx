@@ -1,4 +1,4 @@
-export default function Politica() {
+export default function Genres() {
   return (
     <>
         <div>genres</div>

@@ -1,6 +1,7 @@
 export interface SpotifyUser {
     display_name: string;
     email: string;
+    id: string;
     followers: {
       href: string;
       total: number;
@@ -38,3 +39,5 @@ export type RecentTrack = {
     name: string;
     artist: string;
 };
+
+export type TimeRange = 'short_term' | 'medium_term' | 'long_term'

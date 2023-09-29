@@ -1,7 +1,10 @@
-export default function Contato() {
+'use client';
+import ImageEditor from "../../components/ImageEditor";
+
+export default function Recently() {
   return (
     <>
-        <div>recently</div>
+        <ImageEditor/>
     </>
   )
 }
