@@ -95,11 +95,13 @@ export function CreatePlaylist({ timeRange, play }: CreatePlaylistProps) {
                     <div className="flex items-center gap-2 mt-6">
                         <span className="text-sm">Playlist Criada:</span>
                         <div className="text-sm flex items-center gap-2">
-                            <button
-                                onClick={handleCreatePlaylist}
-                                className="flex items-center gap-2 bg-green-500 text-black rounded-full px-8 py-3 border-b-4 border-b-green-700 text-md font-semibold border-em hover:bg-green-600">
-                                 <FaSpotify size={16}/> <Link href={`${playList.link}`}>Abrir no Spotify</Link>  
-                            </button>
+                            <a target="_blank" href={`${playList.link}`}>
+                                <button
+                                    onClick={handleCreatePlaylist}
+                                    className="flex items-center gap-2 bg-green-500 text-black rounded-full px-8 py-3 border-b-4 border-b-green-700 text-md font-semibold border-em hover:bg-green-600">
+                                    <FaSpotify size={16}/> Abrir no Spotify 
+                                </button>
+                            </a> 
                             <button
                                 onClick={(e) => {playPlayList(`${playList.uri}`)}}
                                 className="flex items-center gap-2 bg-green-500 text-black rounded-full px-8 py-3 border-b-4 border-b-green-700 text-md font-semibold border-em hover:bg-green-600">
