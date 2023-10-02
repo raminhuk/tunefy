@@ -120,13 +120,13 @@ export default function Tracks() {
     return (
         <div>
             <div className="w-full" style={idTrack !== null ? { display: 'block' } : { display: 'none' }}>
-                <div className="w-full flex flex-col fixed -bottom-5 left-0">
+                <div className="w-full flex flex-col fixed -bottom-5 left-0 z-10">
                     <div className="bg-gray-800 h-20 w-full flex" id="embed-iframe"></div>
                 </div>
             </div>
             {topTracks ? (
                 <>
-                <div className="max-w-4xl w-11/12 mx-auto mt-8">
+                <div className="max-w-5xl w-11/12 mx-auto mt-8">
                     <CreatePlaylist timeRange={timeRange} play={handleTrack}/>
                     <div className="text-center max-w-7xl mx-auto">
                         {/* <h2 className="text-2xl font-bold mb-4">Músicas mais ouvidas</h2> */}
