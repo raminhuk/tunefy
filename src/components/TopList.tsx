@@ -26,6 +26,11 @@ export function TopList({ listItems, time, handleTrack, idTrack, isPlay }:TopLis
                                         <span className='z-10 w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-customPink to-customBlue absolute -top-4 font-semibold text-xl tracking-wider'>
                                         {index + 1}
                                         </span>
+                                        {index === 0 && (
+                                            <span className="rotate-45 absolute -top-2 -right-4">
+                                                <Image width={30} height={30} className="h-auto w-16" src="../crown.svg" alt="Crown" />
+                                            </span>
+                                        )}
                                         <button className={`${isPlay && idTrack === `spotify:track:${track.id}` ? 'bg-opacity-70 hover:opacity-100' : 'opacity-0 hover:opacity-100'} bg-opacity-70  m-1 rounded-full bg-black absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center`} onClick={() => { handleTrack && handleTrack(`spotify:track:${track.id}`) }}>
                                             {idTrack === `spotify:track:${track.id}` && isPlay ? (
                                                 <BsPauseCircleFill size={30} />
