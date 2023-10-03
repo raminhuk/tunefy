@@ -120,7 +120,7 @@ export default function Tracks() {
     return (
         <div>
             <div className="w-full" style={idTrack !== null ? { display: 'block' } : { display: 'none' }}>
-                <div className="w-full flex flex-col fixed -bottom-5 left-0 z-10">
+                <div className="w-full flex flex-col fixed md:-bottom-5 -bottom-3 left-0 z-20">
                     <div className="bg-gray-800 h-20 w-full flex" id="embed-iframe"></div>
                 </div>
             </div>
