@@ -23,7 +23,7 @@ export function Header() {
     };
 
     return (
-        <header className="text-white">
+        <header className="text-white relative z-20">
             <div className="py-3 max-w-7xl w-11/12 mx-auto flex justify-between lg:flex-row justify-center lg:justify-between items-center lg:items-center lg:py-0" >
                 <div className="flex items-center">
                     <Link href="/" className="flex items-center gap-2">
