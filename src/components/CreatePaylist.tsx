@@ -76,7 +76,6 @@ export function CreatePlaylist({ timeRange, play }: CreatePlaylistProps) {
 
     const playPlayList = async (idPlaylist: string) => {
         play(idPlaylist)
-        console.log(idPlaylist, 'chama', playList);
     }
 
 
@@ -97,7 +96,6 @@ export function CreatePlaylist({ timeRange, play }: CreatePlaylistProps) {
                         <div className="text-sm flex items-center gap-2">
                             <a target="_blank" href={`${playList.link}`}>
                                 <button
-                                    onClick={handleCreatePlaylist}
                                     className="flex items-center gap-2 bg-green-500 text-black rounded-full md:px-8 md:py-3 px-6 py-2 border-b-4 border-b-green-700 md:text-md text-sm font-semibold border-em hover:bg-green-600">
                                     <FaSpotify size={16}/> Abrir no Spotify 
                                 </button>
