@@ -13,12 +13,13 @@ interface ImageEditorProps {
 }
 
 function ImageEditor({ timeRange }: ImageEditorProps ) {
-  const [generatedImageUrl, setGeneratedImageUrl] = useState<string>('');
+  const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const { topTracks, setTopTracks } = useTracksStore();
 
 
   const generateImage = () => {
+    setGeneratedImageUrl(null)
     const imageContainer = document.getElementById('image-container');
 
     if (imageContainer) {
@@ -30,6 +31,7 @@ function ImageEditor({ timeRange }: ImageEditorProps ) {
   };
 
   const onClose = () => {
+    setGeneratedImageUrl(null)
     setOpenModal(false);
   }
 
@@ -92,7 +94,7 @@ function ImageEditor({ timeRange }: ImageEditorProps ) {
             {generatedImageUrl && (
                 <a 
                     href={generatedImageUrl} 
-                    download="captured_image.png" 
+                    download={`tunefy-${parseInt(String(Math.random() * (100 - 1) + 1))}.png`} 
                     style={{ display: 'none' }} 
                     ref={(link) => link?.click()}
                 >
