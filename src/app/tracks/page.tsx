@@ -10,6 +10,7 @@ import { CreatePlaylist } from '../../components/CreatePaylist';
 import { toast } from 'react-toastify';
 import LoadingSpinner from '../../components/Loading';
 import { TopList } from '../../components/TopList';
+import ImageEditor from '../../components/ImageEditor';
 
 interface IFrameAPI {
     createController(
@@ -151,6 +152,7 @@ export default function Tracks() {
                             </button>
                         </div>
                     </div>
+                    <ImageEditor timeRange={timeRange}/> 
                    
                     {timeRanges.map((time) => (
                         <div key={time} className="none" style={time === timeRange ? { display: 'block' } : { display: 'none' }}>
