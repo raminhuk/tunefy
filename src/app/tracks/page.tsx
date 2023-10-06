@@ -1,13 +1,10 @@
 'use client';
-import React, { MouseEvent, useEffect, useState } from 'react';
-import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
-import { BsPauseCircleFill, BsPlayCircleFill } from "react-icons/bs";
 import { useTracksStore } from '../../store/tracksStore';
 import api from '../../libs/api';
 import { TimeRange, Track } from '../../@types/types';
 import { CreatePlaylist } from '../../components/CreatePaylist';
-import { toast } from 'react-toastify';
 import LoadingSpinner from '../../components/Loading';
 import { TopList } from '../../components/TopList';
 import ImageEditor from '../../components/ImageEditor';
@@ -152,7 +149,7 @@ export default function Tracks() {
                             </button>
                         </div>
                     </div>
-                    <ImageEditor timeRange={timeRange}/> 
+                    {/* <ImageEditor timeRange={timeRange}/>  */}
                    
                     {timeRanges.map((time) => (
                         <div key={time} className="none" style={time === timeRange ? { display: 'block' } : { display: 'none' }}>
