@@ -3,13 +3,13 @@ export interface SpotifyUser {
     email: string;
     id: string;
     followers: {
-      href: string;
-      total: number;
+        href: string;
+        total: number;
     };
     images: {
-      url: string;
-      height: number;
-      width: number;
+        url: string;
+        height: number;
+        width: number;
     }[];
 }
 
@@ -18,17 +18,24 @@ export interface Track {
     name: string;
     artists: { name: string }[];
     album: {
-      images: {
+        images: {
+            url: string;
+            width: number;
+            height: number;
+        }[];
+    };
+    type: string
+}
+
+export interface Artist {
+    id: string;
+    name: string;
+    images: {
         url: string;
         width: number;
         height: number;
-      }[];
-    };
-  }
-
-export type Artist = {
-    name: string;
-    imageUrl: string;
+    }[];
+    genres: string[]
 };
 
 export type Genre = {
