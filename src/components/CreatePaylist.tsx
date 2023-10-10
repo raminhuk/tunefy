@@ -83,7 +83,7 @@ export function CreatePlaylist({ timeRange, play }: CreatePlaylistProps) {
     return (
         <div className="mb-8 overflow-hidden relative flex flex-col md:flex-row md:px-10 md:py-16 p-3 justify-between items-center rounded-md border border-black">
             {loading && <LoadingSpinner/>}
-            <span className="md:w-2/3 max-w-md font-semibold tracking-wider md:text-2xl text-sm mb-8">
+            <span className="md:w-2/3 max-w-md font-semibold tracking-wide md:text-2xl text-sm mb-8">
                 Crie uma playlist com as mais ouvidas por você!<br />
                 <span className="text-xs md:text-sm font-normal">
                     Período selecionado:

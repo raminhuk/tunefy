@@ -79,7 +79,7 @@ export default function Tracks() {
         fetchTopTracks()
 
         const script = document.createElement("script");
-        script.src = "https://open.spotify.com/embed-podcast/iframe-api/v1";
+        script.src = "https://open.spotify.com/embed/iframe-api/v1";
         script.async = true;
 
         document.body.appendChild(script);

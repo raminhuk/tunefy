@@ -45,7 +45,7 @@ export default function Recently() {
                 {recently.map((item: any, index: number) => (
                         <li key={index+item.track.id} className={`w-full items-center flex gap-3`}>
                             <div className={`relative w-full lg:p-4 p-2 rounded-md flex space-y-1 justify-between items-center gap-4 my-1.5 bg-zinc-900`}>
-                                <span className='z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-customPink to-customBlue absolute lg:top-2 lg:left-2 -top-2 -left-2 font-semibold text-sm tracking-wider'>{index + 1}°</span>
+                                <span className='z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-customPink to-customBlue absolute -top-2 -left-3 font-semibold text-sm tracking-wider'>{index + 1}°</span>
                                 <div className={`flex gap-5 items-center`}>
                                     <div className="relative">
                                         <Image
