@@ -57,6 +57,7 @@ export default function Artist() {
                 <>
                 <div className="max-w-5xl w-11/12 mx-auto mt-8">
                     <div className="text-center max-w-7xl mx-auto">
+                        <h1 className="font-semibold text-xl tracking-wider py-2 mb-2">Top Artistas</h1>
                         <div className="flex justify-between gap-2 mb-4">
                             <button
                                 onClick={() => handleTimeRangeChange('short_term')}
@@ -78,7 +79,6 @@ export default function Artist() {
                             </button>
                         </div>
                     </div>
-                   
                     {timeRanges.map((time) => (
                         <div key={time} className="none" style={time === timeRange ? { display: 'block' } : { display: 'none' }}>
                             <TopList key={time} listItems={topArtist} time={time} type="artist"/>

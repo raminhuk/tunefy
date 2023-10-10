@@ -126,6 +126,7 @@ export default function Tracks() {
                 <>
                 <div className="max-w-5xl w-11/12 mx-auto mt-8">
                     <CreatePlaylist timeRange={timeRange} play={handleTrack}/>
+                    <h1 className="text-center font-semibold text-xl tracking-wider py-2 mb-2">Top Músicas</h1>
                     <div className="text-center max-w-7xl mx-auto">
                         {/* <h2 className="text-2xl font-bold mb-4">Músicas mais ouvidas</h2> */}
                         <div className="flex justify-between gap-2 mb-4">
@@ -150,7 +151,6 @@ export default function Tracks() {
                         </div>
                     </div>
                     {/* <ImageEditor timeRange={timeRange}/>  */}
-                   
                     {timeRanges.map((time) => (
                         <div key={time} className="none" style={time === timeRange ? { display: 'block' } : { display: 'none' }}>
                             <TopList key={time} listItems={topTracks} handleTrack={handleTrack} time={time} idTrack={idTrack} isPlay={isPlay}/>

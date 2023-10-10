@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Artist, Track } from "../@types/types";
 import { BsPauseCircleFill, BsPlayCircleFill } from "react-icons/bs";
+import { FiExternalLink } from "react-icons/fi";
 
 interface TopListProps {
     listItems: Record<string, any> | null;
@@ -15,7 +16,7 @@ export function TopList({ listItems, time, handleTrack, idTrack, isPlay, type = 
     return (
         <div>
             {type === 'track' ? (
-                <ul className="flex flex-wrap my-10">
+                <ul className="flex flex-wrap">
                     {listItems?.[time]?.map((track: Track, index: number) => (
                         <li key={track.id} className={`w-full items-center flex gap-3 ${index < 3 ? 'flex-1 bg-inherit flex-col' : 'flex'} ${index === 1 ? 'order-1 mt-16' : 'order-5'} ${index === 2 ? 'mt-20' : ''}`}>
                             <div className={`relative w-full lg:p-4 p-2 rounded-md flex space-y-1 justify-between items-center gap-4 my-1.5 ${index < 3 ? 'bg-inherit flex-col' : 'bg-zinc-900'}`}>
@@ -47,7 +48,11 @@ export function TopList({ listItems, time, handleTrack, idTrack, isPlay, type = 
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-gray-100 font-semibold text-xs tracking-wider lg:text-base">{track.name}</span>
-                                        <span className="text-gray-400 text-sm">{track.artists[0].name}</span>
+                                        <span className="text-gray-400 text-sm">
+                                            {track.artists.map((artist: any, index: number) => (
+                                                <span key={artist.id}>{index !== 0 && ', '}{artist.name}</span>
+                                            ))}
+                                        </span>
                                     </div>
                                 </div>
                                 {index > 2 && (
@@ -64,7 +69,7 @@ export function TopList({ listItems, time, handleTrack, idTrack, isPlay, type = 
                     ))}
                 </ul>
             ) : (
-                <ul className="flex flex-wrap my-10">
+                <ul className="flex flex-wrap">
                     {listItems?.[time]?.map((artist: Artist, index: number) => (
                         <li key={artist.id} className={`w-full items-center flex gap-3`}>
                             <div className={`relative w-full lg:p-4 p-2 rounded-md flex space-y-1 justify-between items-center gap-4 my-1.5 bg-zinc-900`}>
@@ -74,15 +79,20 @@ export function TopList({ listItems, time, handleTrack, idTrack, isPlay, type = 
                                         <Image className={`h-auto w-full`} style={{ maxWidth: `80px`, minWidth: '80px' }} alt={artist.name} src={artist.images[0].url} width={artist.images[0].width} height={artist.images[0].height} />
                                     </div>
                                     <div className="flex flex-col lg:gap-1 gap-2">
-                                        <span className="text-gray-100 font-semibold text-base tracking-wider lg:text-lg">{artist.name}</span>
+                                        <span className="text-gray-100 font-semibold text-sm tracking-wider lg:text-lg">{artist.name}</span>
                                         <div className="flex flex-wrap gap-1">
                                             {artist.genres.map((genre, index: number) => (
-                                                <span key={index} className="text-gray-100 text-sm px-2 bg-zinc-700 rounded-xl capitalize tracking-wider" style={{fontSize: '10px',lineHeight: '17px'}}>{genre}</span>
+                                                <span key={index} className="text-gray-100 text-xs lg:text-sm lg:px-2 px-1 bg-customBlue rounded-xl capitalize tracking-wider" style={{fontSize: '10px',lineHeight: '17px'}}>{genre}</span>
                                             ))}
                                         </div>
 
                                     </div>
                                 </div>
+                                <span>
+                                    <a className="flex lg:p-5" href={artist?.external_urls.spotify} target="_blank">
+                                        <FiExternalLink size={25}/>
+                                    </a>
+                                </span>
                             </div>
                         </li>
                     ))}

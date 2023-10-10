@@ -38,9 +38,9 @@ export default function User() {
     }, []);
     return (
         <>
-            <div className="cursor-pointer relative rounded-full -outline-offset-1 hover:outline-2 hover:outline hover:outline-gray-400 " onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
-                <div className="flex rounded-full overflow-hidden items-center gap-3 text-xs">
-                    <div className="w-10 h-10">
+            <div className="cursor-pointer relative rounded-full" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
+                <div className="flex rounded-full overflow-hidden items-center gap-3 text-xs bg-gradient-to-r from-customPink to-customBlue p-0.5">
+                    <div className="w-10 h-10 rounded-full overflow-hidden">
                         {user ? (
                             <Image
                                 src={user.images[0].url}

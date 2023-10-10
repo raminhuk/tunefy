@@ -66,7 +66,8 @@ export function CreatePlaylist({ timeRange, play }: CreatePlaylistProps) {
             
             if (response.status === 201) {
                 setLoading(false)
-                toast.success("Sua playlist foi criada com sucesso");
+                toast.success(
+                    "Sua playlist foi criada com sucesso, confira no seu Spotify", {autoClose: 5000});
             }
         } catch (error: any) {
             toast.warning("Tivemos um problema para criar sua Playlist");
