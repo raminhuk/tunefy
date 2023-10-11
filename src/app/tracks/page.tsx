@@ -8,6 +8,7 @@ import { CreatePlaylist } from '../../components/CreatePaylist';
 import LoadingSpinner from '../../components/Loading';
 import { TopList } from '../../components/TopList';
 import ImageEditor from '../../components/ImageEditor';
+import { Metadata } from 'next';
 
 interface IFrameAPI {
     createController(
@@ -31,6 +32,11 @@ declare global {
     interface Window {
         onSpotifyIframeApiReady: (IFrameAPI: IFrameAPI) => void;
     }
+}
+
+export const metadata: Metadata = {
+    title: 'Tunefy - Top Músicas',
+    description: 'As mais ouvidas por você no Spotify',
 }
 
 export default function Tracks() {
@@ -98,7 +104,6 @@ export default function Tracks() {
         };
     }, []);
 
-    console.log(topTracks)
     const handleTimeRangeChange = (newTimeRange: TimeRange) => {
         setTimeRange(newTimeRange)
     };

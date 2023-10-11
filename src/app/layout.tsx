@@ -5,6 +5,10 @@ import Header from '../components/Header'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../components/Footer'
+import GoogleAnalytics from '../components/GoogleAnalytics'
+import CookieBanner from '../components/cookiebanner'
+
+export const GA_TRACKING_ID: string | undefined = process.env.NEXT_PUBLIC_GOOGLE_ID;
 
 const poppins = Poppins({
     weight: ['200', '400', '600', '800'],
@@ -23,6 +27,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
+            {GA_TRACKING_ID && (
+                <GoogleAnalytics GA_MEASUREMENT_ID={GA_TRACKING_ID}/>
+            )}
             <body className={`min-h-screen ${poppins.className}`}>
                 <ToastContainer />
                 <Header />
@@ -30,6 +37,7 @@ export default function RootLayout({
                     {children}
                 </div>
                 <Footer/>
+                <CookieBanner/>
             </body>
         </html>
     )
