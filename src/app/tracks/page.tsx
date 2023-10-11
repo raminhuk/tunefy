@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
 import { useTracksStore } from '../../store/tracksStore';
@@ -34,10 +35,10 @@ declare global {
     }
 }
 
-export const metadata: Metadata = {
-    title: 'Tunefy - Top Músicas',
-    description: 'As mais ouvidas por você no Spotify',
-}
+// export const metadata: Metadata = {
+//     title: 'Tunefy - Top Músicas',
+//     description: 'As mais ouvidas por você no Spotify',
+// }
 
 export default function Tracks() {
     const { topTracks, setTopTracks } = useTracksStore();
