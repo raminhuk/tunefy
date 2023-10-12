@@ -14,7 +14,7 @@ export default function Recently() {
         async function fetchRecently() {
             if (!recently) {
                 try {
-                    const response = await api(`me/player/recently-played`);
+                    const response = await api(`me/player/recently-played?limit=50`);
                     setRecently(response.data.items);
                     console.log(response);
                 } catch (error: any) {

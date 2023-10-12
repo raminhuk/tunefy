@@ -2,9 +2,11 @@
 
 import { useMemo } from "react";
 import { useArtistStore } from "../../store/artistStore";
+import { useRouter } from "next/navigation";
 
 export default function Genres() {
     const { topArtist } = useArtistStore();
+    const router = useRouter()
     const timeRanges: string[] = useMemo(() => ['short_term', 'medium_term', 'long_term'], []);
     const valueCounts: Record<string, number> = {};
 
@@ -18,8 +20,8 @@ export default function Genres() {
             valueCounts[value] = (valueCounts[value] || 0) + 1;
         });
 
-        
-        console.log(groupGenres);
+    } else {
+        router.push('/login');
     }
 
     const valueObjects: { value: string, frequency: number }[] = Object.keys(valueCounts).map(value => ({

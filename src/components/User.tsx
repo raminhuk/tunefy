@@ -7,6 +7,7 @@ import Link from "next/link";
 import { getSpotifyAccessToken } from "../auth/spotifyToken";
 import { useUserStore } from "../store/userStore";
 import api from "../libs/api";
+import { toast } from "react-toastify";
 
 export default function User() {
     const { user, setUser } = useUserStore();
@@ -30,7 +31,7 @@ export default function User() {
                     setUser(response.data);
                 } catch (error: any) {
                     localStorage.removeItem('access_token');
-                    console.log(error)
+                    toast.warning(error.response.data);
                 }
             };
             getUserData();

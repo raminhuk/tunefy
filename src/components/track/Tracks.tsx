@@ -8,6 +8,7 @@ import { TimeRange } from '../../@types/types';
 import { CreatePlaylist } from '../../components/CreatePaylist';
 import LoadingSpinner from '../../components/Loading';
 import { TopList } from '../../components/TopList';
+import { toast } from 'react-toastify';
 
 interface IFrameAPI {
     createController(
@@ -50,25 +51,18 @@ export default function Tracks() {
     
                     await Promise.all(
                         timeRanges.map(async (timeRange) => {
-                            const response = await api(`me/top/tracks?time_range=${timeRange}`);
+                            const response = await api(`me/top/tracks?time_range=${timeRange}&limit=50`);
                             topTracksDataByTimeRange[timeRange] = response?.data.items;
                         })
                     );
-    
                     setTopTracks(topTracksDataByTimeRange);
-                    console.log(topTracksDataByTimeRange);
-                    localStorage.removeItem('error');
-    
+                    
                 } catch (error: any) {
-                    const contError = localStorage.getItem('error') || 0;
-                    localStorage.setItem('error', String((Number(contError) + 1)));
-    
-                    if (Number(contError) < 3) {
-                        localStorage.removeItem('access_token');
-                        router.push('/login');
-                    }
+                    localStorage.removeItem('access_token');
+                    router.push('/login');
+                    
                     if (error.response) {
-                        console.log(error.response.data);
+                        toast.warning(error.response.data);
                     }
                 }
             }
