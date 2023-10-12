@@ -1,12 +1,12 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Poppins, Nunito_Sans } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import Header from '../components/Header'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../components/Footer'
 import GoogleAnalytics from '../components/GoogleAnalytics'
-import CookieBanner from '../components/CookieBanner'
+import { CookieBanner } from '../components/CookieBanner'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 export const GA_TRACKING_ID: string | undefined = process.env.NEXT_PUBLIC_GOOGLE_ID;
 
