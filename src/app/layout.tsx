@@ -4,7 +4,7 @@ import { Poppins } from 'next/font/google'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import GoogleAnalytics from '../components/GoogleAnalytics'
-import { CookieBanner } from '../components/CookieBanner'
+// import { CookieBanner } from '../components/CookieBanner'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -37,7 +37,7 @@ export default function RootLayout({
                     {children}
                 </div>
                 <Footer/>
-                <CookieBanner/>
+                {/* <CookieBanner/> */}
             </body>
         </html>
     )
