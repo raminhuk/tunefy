@@ -11,15 +11,15 @@ import api from "../libs/api";
 export default function User() {
     const { user, setUser } = useUserStore();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+    
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
-
+    
     const closeDropdown = () => {
         setIsDropdownOpen(false);
     };
-
+    
     useEffect(() => {
         const token = getSpotifyAccessToken();
 
@@ -35,7 +35,7 @@ export default function User() {
             };
             getUserData();
         }
-    }, []);
+    }, [setUser]);
     return (
         <>
             <div className="cursor-pointer relative rounded-full" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>

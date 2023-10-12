@@ -10,30 +10,29 @@ export default function Recently() {
     const { recently, setRecently } = useRecentlyStore();
     const router = useRouter()
     
-    async function fetchRecently() {
-        if (!recently) {
-            try {
-                const response = await api(`me/player/recently-played`);
-                setRecently(response.data.items);
-                console.log(response);
-            } catch (error: any) {
-                const contError = localStorage.getItem('error') || 0;
-                localStorage.setItem('error', String((Number(contError) + 1)));
-
-                if (Number(contError) < 3) {
-                    localStorage.removeItem('access_token');
-                    router.push('/login');
-                }
-                if (error.response) {
-                    console.log(error.response.data);
+    useEffect(() => {
+        async function fetchRecently() {
+            if (!recently) {
+                try {
+                    const response = await api(`me/player/recently-played`);
+                    setRecently(response.data.items);
+                    console.log(response);
+                } catch (error: any) {
+                    const contError = localStorage.getItem('error') || 0;
+                    localStorage.setItem('error', String((Number(contError) + 1)));
+    
+                    if (Number(contError) < 3) {
+                        localStorage.removeItem('access_token');
+                        router.push('/login');
+                    }
+                    if (error.response) {
+                        console.log(error.response.data);
+                    }
                 }
             }
         }
-    }
-
-    useEffect(() => {
         fetchRecently()
-    }, []);
+    }, [router, recently, setRecently]);
 
  
   return (

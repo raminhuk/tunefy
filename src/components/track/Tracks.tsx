@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation'
 import { useTracksStore } from '../../store/tracksStore';
 import api from '../../libs/api';
@@ -35,49 +35,49 @@ declare global {
 
 export default function Tracks() {
     const { topTracks, setTopTracks } = useTracksStore();
-    const timeRanges: string[] = ['short_term', 'medium_term', 'long_term'];
+    const router = useRouter()
     const [timeRange, setTimeRange] = useState<TimeRange>('short_term');
     const [idTrack, setIdTrack] = useState<string | null>(null);
     const [isPlay, setPlay] = useState<boolean>(false);
+    const [embedController, setEmbedController] = useState<EmbedController | null>(null);
+    const timeRanges: string[] = useMemo(() => ['short_term', 'medium_term', 'long_term'], []);
 
-    const router = useRouter()
-
-    async function fetchTopTracks() {
-        if (!topTracks) {
-            try {
-                const topTracksDataByTimeRange: Record<string, any> = {};
-
-                await Promise.all(
-                    timeRanges.map(async (timeRange) => {
-                        const response = await api(`me/top/tracks?time_range=${timeRange}`);
-                        topTracksDataByTimeRange[timeRange] = response?.data.items;
-                    })
-                );
-
-                setTopTracks(topTracksDataByTimeRange);
-                console.log(topTracksDataByTimeRange);
-                localStorage.removeItem('error');
-
-            } catch (error: any) {
-                const contError = localStorage.getItem('error') || 0;
-                localStorage.setItem('error', String((Number(contError) + 1)));
-
-                if (Number(contError) < 3) {
-                    localStorage.removeItem('access_token');
-                    router.push('/login');
-                }
-                if (error.response) {
-                    console.log(error.response.data);
+    useEffect(() => {
+        async function fetchTopTracks() {
+            if (!topTracks) {
+                try {
+                    const topTracksDataByTimeRange: Record<string, any> = {};
+    
+                    await Promise.all(
+                        timeRanges.map(async (timeRange) => {
+                            const response = await api(`me/top/tracks?time_range=${timeRange}`);
+                            topTracksDataByTimeRange[timeRange] = response?.data.items;
+                        })
+                    );
+    
+                    setTopTracks(topTracksDataByTimeRange);
+                    console.log(topTracksDataByTimeRange);
+                    localStorage.removeItem('error');
+    
+                } catch (error: any) {
+                    const contError = localStorage.getItem('error') || 0;
+                    localStorage.setItem('error', String((Number(contError) + 1)));
+    
+                    if (Number(contError) < 3) {
+                        localStorage.removeItem('access_token');
+                        router.push('/login');
+                    }
+                    if (error.response) {
+                        console.log(error.response.data);
+                    }
                 }
             }
         }
-    }
 
-    const [embedController, setEmbedController] = useState<EmbedController | null>(null);
+        fetchTopTracks()
+    }, [router, topTracks, setTopTracks, timeRanges]);
 
     useEffect(() => {
-        fetchTopTracks()
-
         const script = document.createElement("script");
         script.src = "https://open.spotify.com/embed/iframe-api/v1";
         script.async = true;
@@ -96,7 +96,7 @@ export default function Tracks() {
             };
             IFrameAPI.createController(element, options, callback);
         };
-    }, []);
+    }, [])
 
     const handleTimeRangeChange = (newTimeRange: TimeRange) => {
         setTimeRange(newTimeRange)

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import api from "../../libs/api";
 import { TimeRange } from "../../@types/types";
 import { useRouter } from "next/navigation";
@@ -9,43 +9,43 @@ import { TopList } from "../../components/TopList";
 
 export default function Artists() {
     const { topArtist, setTopArtist } = useArtistStore();
-    const timeRanges: string[] = ['short_term', 'medium_term', 'long_term'];
     const [timeRange, setTimeRange] = useState<TimeRange>('short_term');
+    const timeRanges: string[] = useMemo(() => ['short_term', 'medium_term', 'long_term'], []);
     const router = useRouter()
     
-    async function fetchTopArtist() {
-        if (!topArtist) {
-            try {
-                const topArtistDataByTimeRange: Record<string, any> = {};
-
-                await Promise.all(
-                    timeRanges.map(async (timeRange) => {
-                        const response = await api(`me/top/artists?time_range=${timeRange}`);
-                        topArtistDataByTimeRange[timeRange] = response?.data.items;
-                    })
-                );
-
-                setTopArtist(topArtistDataByTimeRange);
-                console.log(topArtistDataByTimeRange);
-                localStorage.removeItem('error');
-            } catch (error: any) {
-                const contError = localStorage.getItem('error') || 0;
-                localStorage.setItem('error', String((Number(contError) + 1)));
-
-                if (Number(contError) < 3) {
-                    localStorage.removeItem('access_token');
-                    router.push('/login');
-                }
-                if (error.response) {
-                    console.log(error.response.data);
+    
+    useEffect(() => {
+        async function fetchTopArtist() {
+            if (!topArtist) {
+                try {
+                    const topArtistDataByTimeRange: Record<string, any> = {};
+    
+                    await Promise.all(
+                        timeRanges.map(async (timeRange) => {
+                            const response = await api(`me/top/artists?time_range=${timeRange}`);
+                            topArtistDataByTimeRange[timeRange] = response?.data.items;
+                        })
+                    );
+    
+                    setTopArtist(topArtistDataByTimeRange);
+                    console.log(topArtistDataByTimeRange);
+                    localStorage.removeItem('error');
+                } catch (error: any) {
+                    const contError = localStorage.getItem('error') || 0;
+                    localStorage.setItem('error', String((Number(contError) + 1)));
+    
+                    if (Number(contError) < 3) {
+                        localStorage.removeItem('access_token');
+                        router.push('/login');
+                    }
+                    if (error.response) {
+                        console.log(error.response.data);
+                    }
                 }
             }
         }
-    }
-
-    useEffect(() => {
         fetchTopArtist()
-    }, []);
+    }, [router, topArtist, setTopArtist, timeRange, setTimeRange, timeRanges]);
 
     const handleTimeRangeChange = (newTimeRange: TimeRange) => {
         setTimeRange(newTimeRange)
