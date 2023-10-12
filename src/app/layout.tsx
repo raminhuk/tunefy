@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../components/Footer'
 import GoogleAnalytics from '../components/GoogleAnalytics'
-import CookieBanner from '../components/Cookiebanner'
+import CookieBanner from '../components/CookieBanner'
 
 export const GA_TRACKING_ID: string | undefined = process.env.NEXT_PUBLIC_GOOGLE_ID;
 
