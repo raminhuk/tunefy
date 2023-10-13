@@ -3,14 +3,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useArtistStore } from "../../store/artistStore";
 import { useRouter } from "next/navigation";
-import { FiExternalLink } from "react-icons/fi";
-import { CreatePlaylist } from "../CreatePaylist";
 import LoadingSpinner from "../Loading";
-import { TopList } from "../TopList";
 import api from "../../libs/api";
 import { toast } from "react-toastify";
 import { TimeRange } from "../../@types/types";
-import Image from "next/image";
 
 export default function Genres() {
     const { topArtist, setTopArtist } = useArtistStore();
@@ -57,7 +53,7 @@ export default function Genres() {
         });
     }
 
-    const valueObjects: { value: string, frequency: number }[] = Object.keys(valueCounts).map(value => ({
+    const valueObjects: { value: string, frequency: number }[] | null = Object.keys(valueCounts).map(value => ({
         value,
         frequency: valueCounts[value]
       }));
@@ -77,7 +73,7 @@ export default function Genres() {
 
     return (
         <>
-            {valueObjects ? (
+            {valueObjects.length > 0 ? (
                 <>
                 <div className="max-w-5xl w-11/12 mx-auto mt-8">
                     <h1 className="text-center font-semibold text-xl tracking-wider py-2 mb-2">Top Generos</h1>
@@ -105,7 +101,7 @@ export default function Genres() {
                     </div>
                     {valueObjects.map((item, index) => (
                         <li key={index} className={`w-full items-center flex gap-3`}>
-                            <div className={`relative w-full lg:p-5 p-2 rounded-md flex space-y-1 justify-between items-center gap-4 my-1.5 bg-zinc-900`}>
+                            <div className={`relative w-full p-5 rounded-md flex space-y-1 justify-between items-center gap-4 my-1.5 bg-zinc-900`}>
                                 <span className='z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-customPink to-customBlue absolute -top-2 -left-3 font-semibold text-sm tracking-wide'>{index + 1}°</span>
                                 <div className={`flex gap-5 items-center`}>
                                     <div className="flex flex-col lg:gap-1 gap-2">

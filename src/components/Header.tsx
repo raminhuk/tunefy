@@ -25,7 +25,7 @@ export function Header() {
     return (
         <header className="text-white relative z-20">
             <div className="py-3 max-w-7xl w-11/12 mx-auto flex justify-between lg:flex-row justify-center lg:justify-between items-center lg:items-center lg:py-0" >
-                <div className="flex items-center">
+                <div className="flex items-center justify-center flex-1 lg:flex-0">
                     <Link href="/" className="flex items-center gap-2">
                         <h1 className={`text-transparent bg-gradient-to-r from-customPink via-customPink2 to-customBlue bg-clip-text font-extrabold text-2xl tracking-widest ${nunito.className}`}>TUNEFY</h1>
                         <Image width={64} height={31} className="h-auto w-16" src="../tunefy-logo.svg" alt="Logo Tunefy" />

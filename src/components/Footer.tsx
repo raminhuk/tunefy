@@ -5,7 +5,7 @@ export function Footer() {
     return (
         <footer className="bg-neutral-950 text-white py-8">
             <div className="container mx-auto flex flex-col items-center">
-                <ul className="flex space-x-2">
+                <ul className="flex space-x-2 flex-wrap">
                     <li>
                         <Link href="/" className="lg:px-6 py-8 px-4 hover:text-gray-400">Quem Somos</Link>
                     </li>
