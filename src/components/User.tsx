@@ -51,7 +51,7 @@ export default function User() {
                                 className="w-full h-full object-cover cursor-pointer"
                             />
                         ) : (
-                            <div className="w-10 h-10 flex justify-center items-center bg-gray-200 rounded-full">
+                            <div className="lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center bg-gray-200 rounded-full">
                                 <BiUser size={20} color="#333333" />
                             </div>
                         )}

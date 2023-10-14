@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import User from './User';
 import Link from 'next/link';
+import { MdClose } from "react-icons/md";
 
 
 const nunito = Nunito_Sans({
@@ -40,16 +41,26 @@ export function Header() {
                     </button>
                 </div>
 
-                <div className="flex">
-                    <div className="flex">
-                        <nav className={`fixed lg:flex lg:relative ${isMobileMenuOpen ? 'flex flex-col top-16 bg-gray-800 left-0 w-full' : 'hidden'}`}>
-                            <Link href="/" className="lg:px-6 py-8 px-4 hover:text-gray-400">Principal</Link>
-                            <Link href="/tracks" className="lg:px-6 py-8 px-4 hover:text-gray-400">Top Músicas</Link>
-                            <Link href="/artists" className="lg:px-6 py-8 px-4 hover:text-gray-400">Top Artistas</Link>
-                            <Link href="/genres" className="lg:px-6 py-8 px-4 hover:text-gray-400">Top Generos</Link>
-                            <Link href="/recently" className="lg:px-6 py-8 px-4 hover:text-gray-400">Últimas Ouvidas</Link>
+                <div className={`${isMobileMenuOpen ? 'visible opacity-100' : 'invisible opacity-0 lg:visible lg:opacity-100'} flex z-10 lg:w-auto lg:h-auto w-full h-screen left-0 top-0 fixed lg:flex lg:relative`}>
+                    <div className={`relative z-10 flex w-10/12 bg-white lg:w-auto lg:bg-transparent flex-col transition-transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+                        <div className="flex items-center justify-between lg:hidden p-3 bg-gray-50">
+                            <span className="flex gap-2">
+                                <h1 className={`text-transparent bg-gradient-to-r from-customPink via-customPink2 to-customBlue bg-clip-text font-extrabold text-2xl tracking-widest ${nunito.className}`}>TUNEFY</h1>
+                                <Image width={64} height={31} className="h-auto w-16" src="../tunefy-logo.svg" alt="Logo Tunefy" />
+                            </span>
+                            <span className="p-2" onClick={toggleMobileMenu}>
+                                <MdClose size={25} color="#b6b6b6"/>
+                            </span>
+                        </div>
+                        <nav className={`lg:flex-row flex-col flex lg:relative text-sm lg:text-base text-gray-400 lg:text-gray-100`}>
+                            <Link onClick={toggleMobileMenu} href="/" className="lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 hover:text-gray-400">Principal</Link>
+                            <Link onClick={toggleMobileMenu} href="/tracks" className="lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 hover:text-gray-400">Top Músicas</Link>
+                            <Link onClick={toggleMobileMenu} href="/artists" className="lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 hover:text-gray-400">Top Artistas</Link>
+                            <Link onClick={toggleMobileMenu} href="/genres" className="lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 hover:text-gray-400">Top Generos</Link>
+                            <Link onClick={toggleMobileMenu} href="/recently" className="lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 hover:text-gray-400">Últimas Ouvidas</Link>
                         </nav>
                     </div>
+                    <span onClick={toggleMobileMenu} className="lg:hidden block absolute left-0 top-0 w-full h-screen bg-black bg-opacity-60"></span>
                 </div>
 
                 <User/>
