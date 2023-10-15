@@ -9,6 +9,7 @@ import { CreatePlaylist } from '../../components/CreatePaylist';
 import LoadingSpinner from '../../components/Loading';
 import { TopList } from '../../components/TopList';
 import { toast } from 'react-toastify';
+import { logAmplitudeEvent } from '../../utils/amplitude';
 
 interface IFrameAPI {
     createController(
