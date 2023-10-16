@@ -1,14 +1,16 @@
 'use client';
 import { useEffect } from "react";
 import api from "../../libs/api";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import LoadingSpinner from "../../components/Loading";
 import Image from "next/image";
 import { useRecentlyStore } from "../../store/recentlyStore";
+import { saveLocalStorage } from "../../utils/savelocalStorage";
 
 export default function Recently() {
     const { recently, setRecently } = useRecentlyStore();
     const router = useRouter()
+    const pathname = usePathname()
     
     useEffect(() => {
         async function fetchRecently() {
@@ -18,21 +20,17 @@ export default function Recently() {
                     setRecently(response.data.items);
                     console.log(response);
                 } catch (error: any) {
-                    const contError = localStorage.getItem('error') || 0;
-                    localStorage.setItem('error', String((Number(contError) + 1)));
-    
-                    if (Number(contError) < 3) {
-                        localStorage.removeItem('access_token');
-                        router.push('/login');
+                    localStorage.removeItem('access_token');
+                    saveLocalStorage('path', pathname)
+                    if (error.response.data) {
+                        console.log(error.response.data.error.message);
                     }
-                    if (error.response) {
-                        console.log(error.response.data);
-                    }
+                    router.push('/login');
                 }
             }
         }
         fetchRecently()
-    }, [router, recently, setRecently]);
+    }, [router, recently, setRecently, pathname]);
 
  
   return (

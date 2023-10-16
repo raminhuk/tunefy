@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useTracksStore } from '../../store/tracksStore';
 import api from '../../libs/api';
 import { TimeRange } from '../../@types/types';
@@ -10,6 +10,7 @@ import LoadingSpinner from '../../components/Loading';
 import { TopList } from '../../components/TopList';
 import { toast } from 'react-toastify';
 import { logAmplitudeEvent } from '../../utils/amplitude';
+import { saveLocalStorage } from '../../utils/savelocalStorage';
 
 interface IFrameAPI {
     createController(
@@ -43,6 +44,7 @@ export default function Tracks() {
     const [isPlay, setPlay] = useState<boolean>(false);
     const [embedController, setEmbedController] = useState<EmbedController | null>(null);
     const timeRanges: string[] = useMemo(() => ['short_term', 'medium_term', 'long_term'], []);
+    const pathname = usePathname()
 
     useEffect(() => {
         async function fetchTopTracks() {
@@ -60,17 +62,17 @@ export default function Tracks() {
                     
                 } catch (error: any) {
                     localStorage.removeItem('access_token');
-                    router.push('/login');
-                    
-                    if (error.response) {
-                        toast.warning(error.response.data);
+                    saveLocalStorage('path', pathname)
+                    if (error.response.data) {
+                        console.log(error.response.data.error.message);
                     }
+                    router.push('/login');
                 }
             }
         }
 
         fetchTopTracks()
-    }, [router, topTracks, setTopTracks, timeRanges]);
+    }, [router, topTracks, setTopTracks, timeRanges, pathname]);
 
     useEffect(() => {
         const script = document.createElement("script");

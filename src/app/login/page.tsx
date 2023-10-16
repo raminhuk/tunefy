@@ -24,7 +24,7 @@ const LoginPage = () => {
         const token = getSpotifyAccessToken();
 
         if (token) {
-            router.push('/tracks');
+            router.push('/callback');
         } else {
             window.location.href = `https://accounts.spotify.com/authorize?${params}`;
         }
@@ -33,7 +33,6 @@ const LoginPage = () => {
     return (
         <div className='w-full h-full'>
             <div className='flex justify-center flex-col gap-4 items-center h-full w-full left-0 top-0 absolute'>
-                <span>Autenticando...</span>
                 <ImSpinner2 className="animate-spin text-customBlue text-4xl" />
             </div>
         </div>

@@ -2,17 +2,18 @@
 import { useEffect, useMemo, useState } from "react";
 import api from "../../libs/api";
 import { TimeRange } from "../../@types/types";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useArtistStore } from "../../store/artistStore";
 import LoadingSpinner from "../../components/Loading";
 import { TopList } from "../../components/TopList";
-import { toast } from "react-toastify";
+import { saveLocalStorage } from "../../utils/savelocalStorage";
 
 export default function Artists() {
     const { topArtist, setTopArtist } = useArtistStore();
     const [timeRange, setTimeRange] = useState<TimeRange>('short_term');
     const timeRanges: string[] = useMemo(() => ['short_term', 'medium_term', 'long_term'], []);
     const router = useRouter()
+    const pathname = usePathname()
     
     
     useEffect(() => {
@@ -31,16 +32,16 @@ export default function Artists() {
                     setTopArtist(topArtistDataByTimeRange);
                 } catch (error: any) {
                     localStorage.removeItem('access_token');
-                    router.push('/login');
-                    
-                    if (error.response) {
-                        toast.warning(error.response.data);
+                    saveLocalStorage('path', pathname)
+                    if (error.response.data) {
+                        console.log(error.response.data.error.message);
                     }
+                    router.push('/login');
                 }
             }
         }
         fetchTopArtist()
-    }, [router, topArtist, setTopArtist, timeRange, setTimeRange, timeRanges]);
+    }, [router, topArtist, setTopArtist, timeRange, setTimeRange, timeRanges, pathname]);
 
     const handleTimeRangeChange = (newTimeRange: TimeRange) => {
         setTimeRange(newTimeRange)

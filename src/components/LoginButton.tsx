@@ -1,7 +1,9 @@
 'use client';
+
 import React from 'react';
 import { FaSpotify } from 'react-icons/fa';
 import { useUserStore } from '../store/userStore';
+import { saveLocalStorage } from '../utils/savelocalStorage';
 
 const handleLogin = () => {
     window.location.href = '/tracks'
@@ -9,6 +11,7 @@ const handleLogin = () => {
 
 const LoginButton = () => {
     const { user } = useUserStore();
+    saveLocalStorage('path', '/')
 
     return (
         <button
