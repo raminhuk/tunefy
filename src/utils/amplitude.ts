@@ -6,7 +6,7 @@ amplitude.init(AMPLITUDE_API_KEY || '', {
     defaultTracking: true,
 });
 
-export const logAmplitudeEvent = (eventName: string, eventData?: any) => {
+export const trackAmplitudeEvent = (eventName: string, eventData?: any) => {
     amplitude.track(eventName, eventData);
 };
 

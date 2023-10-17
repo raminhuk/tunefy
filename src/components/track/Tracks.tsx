@@ -8,8 +8,6 @@ import { TimeRange } from '../../@types/types';
 import { CreatePlaylist } from '../../components/CreatePaylist';
 import LoadingSpinner from '../../components/Loading';
 import { TopList } from '../../components/TopList';
-import { toast } from 'react-toastify';
-import { logAmplitudeEvent } from '../../utils/amplitude';
 import { saveLocalStorage } from '../../utils/savelocalStorage';
 
 interface IFrameAPI {

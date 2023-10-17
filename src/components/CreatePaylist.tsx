@@ -8,9 +8,8 @@ import { timeRangeName } from "../utils/timeRangeName";
 import { useState } from "react";
 import LoadingSpinner from "./Loading";
 import { FaSpotify } from "react-icons/fa";
-import { BsPlayCircleFill } from "react-icons/bs";
 import { BiPlayCircle } from "react-icons/bi";
-import Link from "next/link";
+import { trackAmplitudeEvent } from "../utils/amplitude";
 
 type PlaylistAddTracksItem = {
     uris: string[];
@@ -49,6 +48,8 @@ export function CreatePlaylist({ timeRange, play }: CreatePlaylistProps) {
                 if (response.status === 201) {
                     addItemsPlaylist(response?.data.id)
                     setPlaylist({link: response.data.external_urls.spotify, uri: response.data.uri})
+                    trackAmplitudeEvent('create_playlist', {"id_playlist": response?.data.id, "name": response?.data.name,"link": response.data.external_urls.spotify})
+
                 }
             } catch (error: any) {
                 toast.warning("Tivemos um problema para criar sua Playlist");
@@ -67,7 +68,8 @@ export function CreatePlaylist({ timeRange, play }: CreatePlaylistProps) {
             if (response.status === 201) {
                 setLoading(false)
                 toast.success(
-                    "Sua playlist foi criada com sucesso, confira no seu Spotify", {autoClose: 5000});
+                    "Sua playlist foi criada com sucesso, confira no seu Spotify", {autoClose: 5000}
+                );
             }
         } catch (error: any) {
             toast.warning("Tivemos um problema para criar sua Playlist");
