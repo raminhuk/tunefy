@@ -30,13 +30,9 @@ export default function User() {
                 try {
                     const response = await api(`me`);
                     setUser(response.data);
-                    var userProperties = {
-                        "id_spotify": user?.id || null,
-                        "name": user?.display_name || null,
-                        "email": user?.email || null,
-                    };
+                    
 
-                    identifyAmplitudeEvent(userProperties)
+                    
                 } catch (error: any) {
                     localStorage.removeItem('access_token');
                     toast.warning(error.response.data);
@@ -44,7 +40,15 @@ export default function User() {
             };
             getUserData();
         }
-    }, [setUser, user]);
+    }, [setUser]);
+
+    var userProperties = {
+        "id_spotify": user?.id || null,
+        "name": user?.display_name || null,
+        "email": user?.email || null,
+    };
+    
+    identifyAmplitudeEvent(userProperties)
     return (
         <>
             <div className="cursor-pointer relative rounded-full" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
