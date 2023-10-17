@@ -8,6 +8,7 @@ import { getSpotifyAccessToken } from "../auth/spotifyToken";
 import { useUserStore } from "../store/userStore";
 import api from "../libs/api";
 import { toast } from "react-toastify";
+import { identifyAmplitudeEvent } from "../utils/amplitude";
 
 export default function User() {
     const { user, setUser } = useUserStore();
@@ -29,6 +30,13 @@ export default function User() {
                 try {
                     const response = await api(`me`);
                     setUser(response.data);
+                    var userProperties = {
+                        "id_spotify": user?.id || null,
+                        "name": user?.display_name || null,
+                        "email": user?.email || null,
+                    };
+
+                    identifyAmplitudeEvent(userProperties)
                 } catch (error: any) {
                     localStorage.removeItem('access_token');
                     toast.warning(error.response.data);
@@ -36,7 +44,7 @@ export default function User() {
             };
             getUserData();
         }
-    }, [setUser]);
+    }, [setUser, user]);
     return (
         <>
             <div className="cursor-pointer relative rounded-full" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
