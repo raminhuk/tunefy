@@ -30,9 +30,6 @@ export default function User() {
                 try {
                     const response = await api(`me`);
                     setUser(response.data);
-                    
-
-                    
                 } catch (error: any) {
                     localStorage.removeItem('access_token');
                     toast.warning(error.response.data);

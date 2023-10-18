@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import User from './User';
 import Link from 'next/link';
 import { MdClose } from "react-icons/md";
+import { saveLocalStorage } from '../utils/savelocalStorage';
+import { usePathname } from 'next/navigation';
 
 
 const nunito = Nunito_Sans({
@@ -18,6 +20,12 @@ interface HeaderProps {
 
 export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    
+    const pathname = usePathname()
+    if (pathname !== '/callback' && pathname !== '/login') {
+        saveLocalStorage('path', pathname);
+    }
+
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);

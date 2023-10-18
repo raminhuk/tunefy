@@ -1,6 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Montserrat, Poppins, Roboto_Condensed } from 'next/font/google'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import GoogleAnalytics from '../components/GoogleAnalytics'
@@ -12,6 +12,11 @@ export const GA_TRACKING_ID: string | undefined = process.env.NEXT_PUBLIC_GOOGLE
 
 const poppins = Poppins({
     weight: ['200', '400', '600', '800'],
+    subsets: ['latin'],
+})
+
+const roboto = Montserrat({
+    weight: ['200', '300', '400', '500', '600', '800'],
     subsets: ['latin'],
 })
 
@@ -30,7 +35,7 @@ export default function RootLayout({
             {GA_TRACKING_ID && (
                 <GoogleAnalytics GA_MEASUREMENT_ID={GA_TRACKING_ID}/>
             )}
-            <body className={`min-h-screen ${poppins.className}`}>
+            <body className={`min-h-screen ${roboto.className}`}>
                 <ToastContainer />
                 <Header />
                 <div className="min-h-[calc(100vh_-_88px)]">

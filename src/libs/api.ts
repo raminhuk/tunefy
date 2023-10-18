@@ -29,7 +29,7 @@ api.interceptors.response.use(
         } else {
             console.log(`Oops: ${error}`);
         }
-        console.log(error)
+        window.location.href = '/login';
         return Promise.reject(error);
     }
 );
