@@ -7,41 +7,28 @@ import LoadingSpinner from "../Loading";
 import api from "../../libs/api";
 import { TimeRange } from "../../@types/types";
 import { saveLocalStorage } from "../../utils/savelocalStorage";
+import { fetchTopArtist } from "../../libs/fetchAPI";
 
 export default function Genres() {
     const { topArtist, setTopArtist } = useArtistStore();
-    const router = useRouter()
     const [timeRange, setTimeRange] = useState<TimeRange>('short_term');
-    const timeRanges: string[] = useMemo(() => ['short_term', 'medium_term', 'long_term'], []);
     const valueCounts: Record<string, number> = {};
-    const pathname = usePathname()
+
 
     useEffect(() => {
-        async function fetchTopArtist() {
+        async function fetchData() {
             if (!topArtist) {
                 try {
-                    const topArtistDataByTimeRange: Record<string, any> = {};
-    
-                    await Promise.all(
-                        timeRanges.map(async (timeRange) => {
-                            const response = await api(`me/top/artists?time_range=${timeRange}&limit=50`);
-                            topArtistDataByTimeRange[timeRange] = response?.data.items;
-                        })
-                    );
-    
+                    const topArtistDataByTimeRange = await fetchTopArtist();
                     setTopArtist(topArtistDataByTimeRange);
                 } catch (error: any) {
-                    localStorage.removeItem('access_token');
-                    saveLocalStorage('path', pathname)
-                    if (error.response.data) {
-                        console.log(error.response.data.error.message);
-                    }
-                    router.push('/login');
+                    console.log(error)
                 }
             }
         }
-        fetchTopArtist()
-    }, [router, topArtist, setTopArtist, timeRange, setTimeRange, timeRanges, pathname]);
+
+        fetchData();
+    }, [topArtist, setTopArtist]);
     
     if (topArtist) {
         const groupGenres = topArtist[timeRange].map((item:any) => {
