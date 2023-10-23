@@ -99,32 +99,7 @@ export function TopList({ listItems, time, handleTrack, idTrack, isPlay, type = 
                 </ul>
             ) : (
                 <ul className="flex flex-wrap">
-                    {listItems?.[time]?.map((artist: Artist, index: number) => (
-                        <li key={artist.id} className={`w-full items-center flex gap-3`}>
-                            <div className={`relative w-full lg:p-4 p-2 rounded-md flex space-y-1 justify-between items-center gap-4 my-1.5 bg-zinc-900`}>
-                                <span className='z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-customPink to-customBlue absolute -top-2 -left-3 font-semibold text-sm tracking-wide'>{index + 1}°</span>
-                                <div className={`flex gap-5 items-center`}>
-                                    <div className="relative">
-                                        <Image className={`h-auto w-full rounded-sm object-cover`} style={{ maxWidth: `80px`, minWidth: '80px', maxHeight: '80px'}} alt={artist.name} src={artist.images[0].url} width={artist.images[0].width} height={artist.images[0].height} />
-                                    </div>
-                                    <div className="flex flex-col lg:gap-1 gap-2">
-                                        <span className="text-gray-100 font-semibold text-sm tracking-wide lg:text-lg">{artist.name}</span>
-                                        <div className="flex flex-wrap gap-1">
-                                            {artist.genres.map((genre, index: number) => (
-                                                <span key={index} className="text-gray-100 text-xs lg:text-sm lg:px-2 px-1 bg-gray-700 rounded-xl capitalize tracking-wide" style={{fontSize: '10px',lineHeight: '17px'}}>{genre}</span>
-                                            ))}
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <span>
-                                    <a className="flex lg:p-5" href={artist?.external_urls.spotify} target="_blank">
-                                        <FiExternalLink size={25}/>
-                                    </a>
-                                </span>
-                            </div>
-                        </li>
-                    ))}
+                   
                 </ul>
             )}
         </div>

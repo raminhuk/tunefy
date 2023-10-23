@@ -59,12 +59,7 @@ export default function Tracks() {
                     setTopTracks(topTracksDataByTimeRange);
                     
                 } catch (error: any) {
-                    localStorage.removeItem('access_token');
-                    saveLocalStorage('path', pathname)
-                    if (error.response.data) {
-                        console.log(error.response.data.error.message);
-                    }
-                    router.push('/login');
+                    console.log(error)
                 }
             }
         }
