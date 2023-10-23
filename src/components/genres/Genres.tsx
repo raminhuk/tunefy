@@ -8,13 +8,14 @@ import api from "../../libs/api";
 import { TimeRange } from "../../@types/types";
 import { saveLocalStorage } from "../../utils/savelocalStorage";
 import { fetchTopArtist } from "../../libs/fetchAPI";
+import { TopList2 } from "../TopList2";
 
 export default function Genres() {
     const { topArtist, setTopArtist } = useArtistStore();
-    const [timeRange, setTimeRange] = useState<TimeRange>('short_term');
-    const valueCounts: Record<string, number> = {};
-
-
+    const timeRanges = ['short_term', 'medium_term', 'long_term']
+    const allGroupGenres: Record<string, Array<{ genre: string, frequency: number }>> = {};
+    
+    
     useEffect(() => {
         async function fetchData() {
             if (!topArtist) {
@@ -31,79 +32,44 @@ export default function Genres() {
     }, [topArtist, setTopArtist]);
     
     if (topArtist) {
-        const groupGenres = topArtist[timeRange].map((item:any) => {
-            return item.genres
-        })
+        timeRanges.forEach((time: string) => {
+            allGroupGenres[time] = [];
+            const genres = topArtist[time].map((item: any) => item.genres);
+        
+            // Criar um objeto que armazena o gênero e a frequência em que ele se repete
+            const genreFrequency: Record<string, number> = {};
+            genres.flat().forEach((genre: string) => {
+                if (genreFrequency[genre]) {
+                    genreFrequency[genre] += 1;
+                } else {
+                    genreFrequency[genre] = 1;
+                }
+            });
+        
+            // Converter o objeto em um array de objetos com gênero e frequência
+            const genreFrequencyArray = Object.keys(genreFrequency).map((genre) => ({
+                genre,
+                frequency: genreFrequency[genre],
+            }));
+        
+            genreFrequencyArray.sort((a, b) => b.frequency - a.frequency);
 
-        const allValues: string[] = [].concat(...groupGenres);
-        allValues.forEach(value => {
-            valueCounts[value] = (valueCounts[value] || 0) + 1;
+            allGroupGenres[time] = genreFrequencyArray;
         });
     }
 
-    const valueObjects: { value: string, frequency: number }[] | null = Object.keys(valueCounts).map(value => ({
-        value,
-        frequency: valueCounts[value]
-      }));
-
-      valueObjects.sort((a, b) => {
-        const countDiff = b.frequency - a.frequency;
-        if (countDiff === 0) {
-          return a.value.localeCompare(b.value);
-        }
-        return countDiff;
-    });
-
-    const handleTimeRangeChange = (newTimeRange: TimeRange) => {
-        setTimeRange(newTimeRange)
-    };
-
-
     return (
         <>
-            {valueObjects.length > 0 ? (
+            {topArtist ? (
                 <>
-                <div className="max-w-5xl w-11/12 mx-auto mt-8">
-                    <h1 className="text-center font-semibold text-xl tracking-wider py-2 mb-2">Top Generos</h1>
-                    <div className="text-center max-w-7xl mx-auto">
-                        <div className="flex justify-between gap-2 mb-4">
-                            <button
-                                onClick={() => handleTimeRangeChange('short_term')}
-                                className={`text-xs lg:text-base flex-1 ${timeRange === 'short_term' ? 'bg-gradient-to-r from-customPink to-customBlue' : 'bg-zinc-900'} border border-zinc-800 hover:bg-gradient-to-r from-customPink to-customBlue text-white px-1 py-3 rounded`}
-                            >
-                                Último mês
-                            </button>
-                            <button
-                                onClick={() => handleTimeRangeChange('medium_term')}
-                                className={`text-xs lg:text-base flex-1 ${timeRange === 'medium_term' ? 'bg-gradient-to-r from-customPink to-customBlue' : 'bg-zinc-900'} border border-zinc-800 hover:bg-gradient-to-r from-customPink to-customBlue text-white px-1 py-3 rounded`}
-                            >
-                                Últimos 6 meses
-                            </button>
-                            <button
-                                onClick={() => handleTimeRangeChange('long_term')}
-                                className={`text-xs lg:text-base flex-1 ${timeRange === 'long_term' ? 'bg-gradient-to-r from-customPink to-customBlue' : 'bg-zinc-900'} border border-zinc-800 hover:bg-gradient-to-r from-customPink to-customBlue text-white px-1 py-3 rounded`}
-                            >
-                                Todos os tempos
-                            </button>
+                    <div className="max-w-5xl w-11/12 mx-auto mt-8">
+                        <div className="text-center max-w-7xl mx-auto">
+                            <h1 className="font-semibold text-xl tracking-wider py-2 mb-2">Top Generos</h1>
+                        </div>
+                        <div>
+                            <TopList2 listItems={allGroupGenres} type="genres"/>
                         </div>
                     </div>
-                    {valueObjects.map((item, index) => (
-                        <li key={index} className={`w-full items-center flex gap-3`}>
-                            <div className={`relative w-full p-5 rounded-md flex space-y-1 justify-between items-center gap-4 my-1.5 bg-zinc-900`}>
-                                <span className='z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-customPink to-customBlue absolute -top-2 -left-3 font-semibold text-sm tracking-wide'>{index + 1}°</span>
-                                <div className={`flex gap-5 items-center`}>
-                                    <div className="flex flex-col lg:gap-1 gap-2">
-                                        <span className="text-gray-100 font-semibold text-sm tracking-wide lg:text-lg capitalize">{item.value}</span>
-                                    </div>
-                                </div>
-                                <span className="flex justify-center items-center gap-2">
-                                    <span className="text-gray-300 text-xs">Qnt:</span>
-                                    <span className="text-gray-100 font-semibold text-sm tracking-wide lg:text-xl">{item.frequency}</span>
-                                </span>
-                            </div>
-                        </li>
-                    ))}
-                </div>
                 </>
             ): (
                 <div className='w-full h-full'>

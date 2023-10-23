@@ -30,19 +30,20 @@ export interface Track {
 export interface Artist {
     id: string;
     name: string;
-    external_urls: {
+    external_urls?: {
         spotify: string;
     };
-    images: {
+    images?: {
         url: string;
         width: number;
         height: number;
     }[];
-    genres: string[]
+    genres?: string[]
 };
 
-export type Genre = {
-    name: string;
+export interface GroupGenres {
+    frequency?: number;
+    genre?: string[];
 };
 
 export type RecentTrack = {
@@ -50,6 +51,8 @@ export type RecentTrack = {
     artist: string;
 };
 
+
+export type TrackOrArtist = Track | Artist;
 
 export type TimeRange = 'short_term' | 'medium_term' | 'long_term'
 export type TimeRanges = ['short_term', 'medium_term', 'long_term']

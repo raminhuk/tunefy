@@ -38,7 +38,6 @@ export default function Artists() {
                         <div>
                             <TopList2 listItems={topArtist} type="artist"/>
                         </div>
-                            
                     </div>
                 </>
             ) : (
