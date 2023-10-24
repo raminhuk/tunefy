@@ -31,10 +31,11 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en">
+        <html lang="pt-BR">
             {GA_TRACKING_ID && (
                 <GoogleAnalytics GA_MEASUREMENT_ID={GA_TRACKING_ID}/>
             )}
+            <meta name="theme-color" content="#080010"/>
             <body className={`min-h-screen ${roboto.className}`}>
                 <ToastContainer />
                 <Header />
