@@ -6,23 +6,28 @@ import TimeRenges from "./TimeRanges";
 import { TopList } from "./TopList";
 import { useState } from "react";
 import { time } from "console";
+import { useTracksStore } from "../store/tracksStore";
 
 interface TopListProps {
     listItems: Record<string, any> | null;
-    handleTrack?: (value: string) => void;
-    idTrack?: string | null;
-    isPlay?: boolean
+    handleTimeRange: (value: TimeRange) => void;
     type?: string
 }
 
-export function TopList2({ listItems, handleTrack, idTrack, isPlay, type = 'track' }: TopListProps) {
+export function TopList2({ listItems, handleTimeRange, type = 'track' }: TopListProps) {
+    const { setIdTrack, idTrack, isPlay } = useTracksStore();
+    
     const timeRanges = ['short_term', 'medium_term', 'long_term']
     const [timeRange, setTimeRange] = useState<TimeRange>('short_term');
 
 
     const handleTime = (newTimeRange: TimeRange) => {
-        console.log(newTimeRange)
         setTimeRange(newTimeRange)
+        handleTimeRange(newTimeRange)
+    };
+
+    const handleTrack = (id: string) => {
+        setIdTrack(id)
     };
 
     return (
@@ -80,8 +85,34 @@ export function TopList2({ listItems, handleTrack, idTrack, isPlay, type = 'trac
                                     </div>
                                 </li>
                             ))
-                        ): (
-                            <>asda</>
+                        ) : (
+                            listItems?.[time]?.map((track: Track, index: number) => (
+                                <li key={track.id} className={`w-full items-center flex gap-3 flex`}>
+                                    <div className={`relative w-full lg:p-4 p-2 rounded-md flex space-y-1 justify-between items-center gap-4 my-1.5 bg-zinc-900`}>
+                                        <span className='z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-customPink to-customBlue absolute -top-2 -left-3 font-semibold text-sm tracking-wide'>{index + 1}°</span>
+                                        <div className={`flex gap-4 items-center`}>
+                                            <div className={`relative`}>
+                                                <Image className={`h-auto w-full rounded-sm object-cover`} style={{ maxWidth: `80px`, minWidth: '80px', maxHeight: '80px' }} alt={track.artists[0].name} src={track.album.images[0].url} width={track.album.images[0].width} height={track.album.images[0].height} />
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <span className="text-gray-100 font-semibold text-xs tracking-wide lg:text-base">{track.name}</span>
+                                                <span className="text-gray-400 text-sm">
+                                                    {track.artists.map((artist: any, index: number) => (
+                                                        <span key={artist.id}>{index !== 0 && ', '}{artist.name}</span>
+                                                    ))}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <button className="p-2 hover:opacity-80" onClick={() => { handleTrack && handleTrack(`spotify:track:${track.id}`) }}>
+                                            {idTrack === `spotify:track:${track.id}` && isPlay ? (
+                                                <BsPauseCircleFill size={30} />
+                                            ) : (
+                                                <BsPlayCircleFill size={30} />
+                                            )}
+                                        </button>
+                                    </div>
+                                </li>
+                            ))
                         )}
                     </ul>
                 ))}

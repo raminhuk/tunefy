@@ -18,12 +18,11 @@ type PlaylistAddTracksItem = {
 
 interface CreatePlaylistProps {
     timeRange: TimeRange
-    play: (id: string) => void
 }
 
-export function CreatePlaylist({ timeRange, play }: CreatePlaylistProps) {
+export function CreatePlaylist({ timeRange }: CreatePlaylistProps) {
     const { user } = useUserStore();
-    const { topTracks } = useTracksStore();
+    const { topTracks, setIdTrack } = useTracksStore();
     const token = getSpotifyAccessToken();
     const [loading, setLoading] = useState<boolean>(false);
     const [playList, setPlaylist] = useState<any>(null);
@@ -78,9 +77,8 @@ export function CreatePlaylist({ timeRange, play }: CreatePlaylistProps) {
     }
 
     const playPlayList = async (idPlaylist: string) => {
-        play(idPlaylist)
+        setIdTrack(idPlaylist)
     }
-
 
     return (
         <div className="mb-8 overflow-hidden relative flex flex-col md:flex-row md:px-10 md:py-16 p-3 justify-between items-center rounded-md border border-black">

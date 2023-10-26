@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { MdClose } from "react-icons/md";
 import { saveLocalStorage } from '../utils/savelocalStorage';
 import { usePathname } from 'next/navigation';
+import { PlayTrack } from './PlayTrack';
 
 
 const nunito = Nunito_Sans({
@@ -33,6 +34,7 @@ export function Header() {
 
     return (
         <header className="text-white relative z-20">
+            <PlayTrack/>
             <div className="py-3 max-w-7xl w-11/12 mx-auto flex justify-between lg:flex-row justify-center lg:justify-between items-center lg:items-center lg:py-0" >
                 <div className="flex items-center justify-center flex-1 lg:flex-none">
                     <Link href="/" className="flex items-center gap-2">
