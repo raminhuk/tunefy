@@ -10,7 +10,7 @@ import { useTracksStore } from "../store/tracksStore";
 
 interface TopListProps {
     listItems: Record<string, any> | null;
-    handleTimeRange: (value: TimeRange) => void;
+    handleTimeRange?: (value: TimeRange) => void;
     type?: string
 }
 
@@ -23,7 +23,6 @@ export function TopList2({ listItems, handleTimeRange, type = 'track' }: TopList
 
     const handleTime = (newTimeRange: TimeRange) => {
         setTimeRange(newTimeRange)
-        handleTimeRange(newTimeRange)
     };
 
     const handleTrack = (id: string) => {
