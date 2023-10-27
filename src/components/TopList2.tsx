@@ -10,24 +10,36 @@ import { useTracksStore } from "../store/tracksStore";
 
 interface TopListProps {
     listItems: Record<string, any> | null;
-    handleTimeRange?: (value: TimeRange) => void;
+    timeRangePlayList?: (value: TimeRange) => void;
     type?: string
 }
 
-export function TopList2({ listItems, handleTimeRange, type = 'track' }: TopListProps) {
-    const { setIdTrack, idTrack, isPlay } = useTracksStore();
-    
+export function TopList2({ listItems, timeRangePlayList, type = 'track' }: TopListProps) {
+    const { setIdTrack, idTrack, isPlay, isPause, togglePlay, togglePause } = useTracksStore();
     const timeRanges = ['short_term', 'medium_term', 'long_term']
     const [timeRange, setTimeRange] = useState<TimeRange>('short_term');
 
 
     const handleTime = (newTimeRange: TimeRange) => {
         setTimeRange(newTimeRange)
+        if (timeRangePlayList) {
+            timeRangePlayList(newTimeRange)
+        }
     };
 
     const handleTrack = (id: string) => {
-        setIdTrack(id)
+
+        if (idTrack === id && isPlay) {
+            togglePause(true)
+            togglePlay(false);
+        } else {
+            togglePause(false)
+            togglePlay(true);
+            setIdTrack(id);
+        }
     };
+
+    console.log(listItems);
 
     return (
         <div>
@@ -102,8 +114,8 @@ export function TopList2({ listItems, handleTimeRange, type = 'track' }: TopList
                                                 </span>
                                             </div>
                                         </div>
-                                        <button className="p-2 hover:opacity-80" onClick={() => { handleTrack && handleTrack(`spotify:track:${track.id}`) }}>
-                                            {idTrack === `spotify:track:${track.id}` && isPlay ? (
+                                        <button className="p-2 hover:opacity-80" onClick={() => { handleTrack(track.uri) }}>
+                                            {(track.uri === idTrack) && isPlay ? (
                                                 <BsPauseCircleFill size={30} />
                                             ) : (
                                                 <BsPlayCircleFill size={30} />

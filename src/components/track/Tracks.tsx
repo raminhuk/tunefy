@@ -80,7 +80,7 @@ export default function Tracks() {
                         </div>
                         {/* <ImageEditor timeRange={timeRange}/>  */}
                         <div>
-                            <TopList2 listItems={topTracks} handleTimeRange={handleTimeRangePlay} type="track"/>
+                            <TopList2 listItems={topTracks} timeRangePlayList={handleTimeRangePlay} type="track"/>
                         </div>
                     </div>
                 </>

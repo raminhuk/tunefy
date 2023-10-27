@@ -29,7 +29,7 @@ declare global {
 
 export function PlayTrack() {
     const [embedController, setEmbedController] = useState<EmbedController | null>(null);
-    const { idTrack, togglePlay } = useTracksStore();
+    const { idTrack, togglePlay, isPlay, isPause} = useTracksStore();
 
 
     useEffect(() => {
@@ -54,10 +54,15 @@ export function PlayTrack() {
     }, []);
 
     useEffect(() => {
-        embedController?.loadUri(idTrack);
-        embedController?.play();
 
-    }, [idTrack, togglePlay, embedController]);
+        if (isPause) {
+            embedController?.togglePlay();
+        } else {
+            embedController?.loadUri(idTrack);
+            embedController?.play();
+        }
+        
+    }, [idTrack, togglePlay, embedController, isPause]);
 
     return (
         <>
