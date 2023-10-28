@@ -5,6 +5,7 @@ import { FiExternalLink } from "react-icons/fi";
 import TimeRenges from "./TimeRanges";
 import { useState } from "react";
 import { useTracksStore } from "../store/tracksStore";
+import Equalizer from "./UI/Equalizer";
 
 interface TopListProps {
     listItems: Record<string, any> | null;
@@ -38,8 +39,6 @@ export function TopList({ listItems, timeRangePlayList, type = 'track' }: TopLis
         }
     };
 
-    console.log(listItems)
-
     return (
         type === 'recently' ? (
             <ul className="block">
@@ -49,6 +48,11 @@ export function TopList({ listItems, timeRangePlayList, type = 'track' }: TopLis
                             <span className='z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-customPink to-customBlue absolute -top-2 -left-3 font-semibold text-sm tracking-wider'>{index + 1}°</span>
                             <div className={`flex gap-5 items-center`}>
                                 <div className="relative">
+                                    {(item.track.uri === idTrack) && isPlay && (
+                                        <span className="flex absolute items-center justify-center h-full w-full bg-black bg-opacity-70">
+                                            <Equalizer/>
+                                        </span>
+                                    )}
                                     <Image
                                         className={`h-auto w-full`} 
                                         style={{ maxWidth: `80px`, minWidth: '80px' }} 
@@ -141,7 +145,12 @@ export function TopList({ listItems, timeRangePlayList, type = 'track' }: TopLis
                                         <span className='z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-customPink to-customBlue absolute -top-2 -left-3 font-semibold text-sm tracking-wide'>{index + 1}°</span>
                                         <div className={`flex gap-4 items-center`}>
                                             <div className={`relative`}>
-                                                <Image className={`h-auto w-full rounded-sm object-cover`} style={{ maxWidth: `80px`, minWidth: '80px', maxHeight: '80px' }} alt={track.artists[0].name} src={track.album.images[0].url} width={track.album.images[0].width} height={track.album.images[0].height} />
+                                            {(track.uri === idTrack) && isPlay && (
+                                                <span className="flex absolute items-center justify-center h-full w-full bg-black bg-opacity-70">
+                                                    <Equalizer/>
+                                                </span>
+                                            )}
+                                            <Image className={`h-auto w-full rounded-sm object-cover`} style={{ maxWidth: `80px`, minWidth: '80px', maxHeight: '80px' }} alt={track.artists[0].name} src={track.album.images[0].url} width={track.album.images[0].width} height={track.album.images[0].height} />
                                             </div>
                                             <div className="flex flex-col">
                                                 <span className="text-gray-100 font-semibold text-xs tracking-wide lg:text-base">{track.name}</span>

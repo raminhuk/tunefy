@@ -31,8 +31,6 @@ export default function Tracks() {
         setTimeRange(time)
     }
 
-    console.log(topTracks);
-
     return (
         <div>
             {topTracks ? (
