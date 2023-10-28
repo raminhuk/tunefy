@@ -19,5 +19,5 @@ export const useTracksStore = create<TracksStore>((set) => ({
     setTopTracks: (newTracks: Record<string, any> ) => set({ topTracks: newTracks }),
     setIdTrack: (id: string) => set({ idTrack: id }),
     togglePlay: (play?: boolean) => set((state) => ({ isPlay: play === null ? !state.isPlay : play})),
-    togglePause: (pause?: boolean) => set((state) => ({ isPause: pause === null ? !state.isPlay : pause})),
+    togglePause: (pause?: boolean) => set((state) => ({ isPause: pause === null ? !state.isPause : pause})),
 }));

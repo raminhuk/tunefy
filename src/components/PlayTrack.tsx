@@ -54,15 +54,16 @@ export function PlayTrack() {
     }, []);
 
     useEffect(() => {
-
         if (isPause) {
             embedController?.togglePlay();
-        } else {
+        }
+
+        if (isPlay && !isPause){
             embedController?.loadUri(idTrack);
             embedController?.play();
         }
         
-    }, [idTrack, togglePlay, embedController, isPause]);
+    }, [idTrack, togglePlay, embedController, isPause, isPlay]);
 
     return (
         <>

@@ -28,18 +28,17 @@ export function TopList2({ listItems, timeRangePlayList, type = 'track' }: TopLi
     };
 
     const handleTrack = (id: string) => {
+        if (idTrack === id) {
+            togglePause(true);
+            togglePlay(!isPlay);
+        }
 
-        if (idTrack === id && isPlay) {
-            togglePause(true)
-            togglePlay(false);
-        } else {
-            togglePause(false)
+        if (idTrack !== id){
             togglePlay(true);
+            togglePause(false);
             setIdTrack(id);
         }
     };
-
-    console.log(listItems);
 
     return (
         <div>
