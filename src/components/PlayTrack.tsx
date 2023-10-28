@@ -65,7 +65,7 @@ export function PlayTrack() {
 
     return (
         <>
-           <div className="w-full">
+           <div className={`w-full ${isPlay ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
                 <div className="w-full flex flex-col fixed md:-bottom-5 -bottom-3 left-0 z-20">
                     <div className="bg-gray-800 h-20 w-full flex" id="embed-iframe"></div>
                 </div>
