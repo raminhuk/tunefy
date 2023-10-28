@@ -1,73 +1,40 @@
 'use client';
 import { useEffect } from "react";
-import api from "../../libs/api";
-import { usePathname, useRouter } from "next/navigation";
 import LoadingSpinner from "../../components/Loading";
-import Image from "next/image";
 import { useRecentlyStore } from "../../store/recentlyStore";
-import { saveLocalStorage } from "../../utils/savelocalStorage";
+import { TopList } from "../TopList";
+import { fetchTopRecently } from "../../libs/fetchAPI";
 
 export default function Recently() {
     const { recently, setRecently } = useRecentlyStore();
-    const router = useRouter()
-    const pathname = usePathname()
     
     useEffect(() => {
-        async function fetchRecently() {
+        async function fetchData() {
             if (!recently) {
                 try {
-                    const response = await api(`me/player/recently-played?limit=50`);
-                    setRecently(response.data.items);
-                    console.log(response);
+                    const topRecentlyData = await fetchTopRecently();
+                    setRecently(topRecentlyData);
                 } catch (error: any) {
-                    localStorage.removeItem('access_token');
-                    saveLocalStorage('path', pathname)
-                    if (error.response.data) {
-                        console.log(error.response.data.error.message);
-                    }
-                    router.push('/login');
+                    console.log(error)
                 }
             }
         }
-        fetchRecently()
-    }, [router, recently, setRecently, pathname]);
+        fetchData()
+    }, [recently, setRecently]);
 
  
   return (
     <div>
         {recently ? (
                 <>
-                <div className="max-w-5xl w-11/12 mx-auto mt-8">
-                <h1 className="text-center font-semibold text-xl tracking-wider py-2 mb-2">Últimas Ouvidas</h1>
-                {recently.map((item: any, index: number) => (
-                        <li key={index+item.track.id} className={`w-full items-center flex gap-3`}>
-                            <div className={`relative w-full lg:p-4 p-2 rounded-md flex space-y-1 justify-between items-center gap-4 my-1.5 bg-zinc-900`}>
-                                <span className='z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-customPink to-customBlue absolute -top-2 -left-3 font-semibold text-sm tracking-wider'>{index + 1}°</span>
-                                <div className={`flex gap-5 items-center`}>
-                                    <div className="relative">
-                                        <Image
-                                            className={`h-auto w-full`} 
-                                            style={{ maxWidth: `80px`, minWidth: '80px' }} 
-                                            alt={item.track.album.name} 
-                                            src={item.track.album.images[0].url} 
-                                            width={item.track.album.images[0].width} 
-                                            height={item.track.album.images[0].height} 
-                                        />
-                                    </div>
-                                    <div className="flex flex-col lg:gap-1 gap-2">
-                                        <span className="text-gray-100 font-semibold text-sm tracking-wider lg:text-lg">{item.track.name}</span>
-                                        <span className="text-gray-400 text-sm capitalize">
-                                        {item.track.artists.map((artist: any, index: number) => (
-                                            <span key={artist.id}>{index !== 0 && ', '}{artist.name}</span>
-                                        ))}
-                                        </span>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    ))}
-                </div>
+                    <div className="max-w-5xl w-11/12 mx-auto mt-8">
+                        <div className="text-center max-w-7xl mx-auto">
+                            <h1 className="font-semibold text-xl tracking-wider py-2 mb-2">Últimas Ouvidas</h1>
+                        </div>
+                        <div>
+                            <TopList listItems={recently} type="recently"/>
+                        </div>
+                    </div>
                 </>
             ): (
                 <div className='w-full h-full'>

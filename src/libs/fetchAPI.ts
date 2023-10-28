@@ -8,6 +8,19 @@ interface DataByTimeRange {
 
 const timeRanges = ['short_term', 'medium_term', 'long_term']
 
+export async function fetchTopTracks(): Promise<DataByTimeRange> {
+    const topTracksDataByTimeRange: DataByTimeRange = {};
+  
+    await Promise.all(
+      timeRanges.map(async (timeRange) => {
+        const response: AxiosResponse = await api(`me/top/tracks?time_range=${timeRange}&limit=50`);
+        topTracksDataByTimeRange[timeRange] = response?.data.items;
+      })
+    );
+  
+    return topTracksDataByTimeRange;
+}
+
 export async function fetchTopArtist(): Promise<DataByTimeRange> {
   const topArtistDataByTimeRange: DataByTimeRange = {};
 
@@ -21,16 +34,12 @@ export async function fetchTopArtist(): Promise<DataByTimeRange> {
   return topArtistDataByTimeRange;
 }
 
-
-export async function fetchTopTracks(): Promise<DataByTimeRange> {
-    const topTracksDataByTimeRange: DataByTimeRange = {};
+export async function fetchTopRecently(): Promise<DataByTimeRange> {
   
-    await Promise.all(
-      timeRanges.map(async (timeRange) => {
-        const response: AxiosResponse = await api(`me/top/tracks?time_range=${timeRange}&limit=50`);
-        topTracksDataByTimeRange[timeRange] = response?.data.items;
-      })
-    );
+    const response: AxiosResponse = await api(`me/player/recently-played?limit=50`);
+    const topRecentlyData = response?.data.items;
   
-    return topTracksDataByTimeRange;
+    return topRecentlyData;
   }
+  
+
