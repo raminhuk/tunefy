@@ -1,20 +1,15 @@
 'use client';
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { useArtistStore } from "../../store/artistStore";
-import { usePathname, useRouter } from "next/navigation";
 import LoadingSpinner from "../Loading";
-import api from "../../libs/api";
-import { TimeRange } from "../../@types/types";
-import { saveLocalStorage } from "../../utils/savelocalStorage";
 import { fetchTopArtist } from "../../libs/fetchAPI";
-import { TopList2 } from "../TopList2";
+import { TopList } from "../TopList";
 
 export default function Genres() {
     const { topArtist, setTopArtist } = useArtistStore();
     const timeRanges = ['short_term', 'medium_term', 'long_term']
     const allGroupGenres: Record<string, Array<{ genre: string, frequency: number }>> = {};
-    
     
     useEffect(() => {
         async function fetchData() {
@@ -67,7 +62,7 @@ export default function Genres() {
                             <h1 className="font-semibold text-xl tracking-wider py-2 mb-2">Top Generos</h1>
                         </div>
                         <div>
-                            <TopList2 listItems={allGroupGenres} type="genres"/>
+                            <TopList listItems={allGroupGenres} type="genres"/>
                         </div>
                     </div>
                 </>

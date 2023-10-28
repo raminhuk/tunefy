@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link'
 import { useState, useEffect } from 'react';
-import { getLocalStorage, setLocalStorage } from './storageHelper';
+import { getLocalStorage, setLocalStorage } from './analytics/storageHelper';
 
 export default function CookieBanner() {
     const [cookieConsent, setCookieConsent] = useState(false);

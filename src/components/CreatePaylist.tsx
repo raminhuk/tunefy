@@ -22,7 +22,8 @@ interface CreatePlaylistProps {
 
 export function CreatePlaylist({ timeRange }: CreatePlaylistProps) {
     const { user } = useUserStore();
-    const { topTracks, setIdTrack } = useTracksStore();
+    const { topTracks, setIdTrack, togglePlay, togglePause } = useTracksStore();
+
     const token = getSpotifyAccessToken();
     const [loading, setLoading] = useState<boolean>(false);
     const [playList, setPlaylist] = useState<any>(null);
@@ -77,7 +78,9 @@ export function CreatePlaylist({ timeRange }: CreatePlaylistProps) {
     }
 
     const playPlayList = async (idPlaylist: string) => {
-        setIdTrack(idPlaylist)
+        setIdTrack(idPlaylist);
+        togglePlay(true);
+        togglePause(false);
     }
 
     return (

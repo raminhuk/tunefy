@@ -1,13 +1,9 @@
 'use client';
-import { useEffect, useState } from "react";
-import { TimeRange } from "../../@types/types";
-import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useArtistStore } from "../../store/artistStore";
 import LoadingSpinner from "../../components/Loading";
-import { TopList } from "../../components/TopList";
 import { fetchTopArtist } from "../../libs/fetchAPI";
-import TimeRenges from "../TimeRanges";
-import { TopList2 } from "../TopList2";
+import { TopList } from "../TopList";
 
 export default function Artists() {
     const { topArtist, setTopArtist } = useArtistStore();
@@ -36,7 +32,7 @@ export default function Artists() {
                             <h1 className="font-semibold text-xl tracking-wider py-2 mb-2">Top Artistas</h1>
                         </div>
                         <div>
-                            <TopList2 listItems={topArtist} type="artist"/>
+                            <TopList listItems={topArtist} type="artist"/>
                         </div>
                     </div>
                 </>

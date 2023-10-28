@@ -1,73 +1,37 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation'
 import { useTracksStore } from '../../store/tracksStore';
-import api from '../../libs/api';
-import { TimeRange, TimeRanges } from '../../@types/types';
+import { TimeRange } from '../../@types/types';
 import { CreatePlaylist } from '../../components/CreatePaylist';
 import LoadingSpinner from '../../components/Loading';
-import { TopList } from '../../components/TopList';
-import { saveLocalStorage } from '../../utils/savelocalStorage';
-import { TopList2 } from '../TopList2';
-import router from 'next/router';
-import { PlayTrack } from '../PlayTrack';
-
-interface IFrameAPI {
-    createController(
-        element: HTMLElement | null,
-        options: {
-            width: string;
-            height: string;
-            uri: string;
-        },
-        callback: (EmbedController: EmbedController) => void
-    ): void;
-}
-
-interface EmbedController {
-    loadUri(uri: string): void;
-    play(): void;
-    togglePlay(): void;
-}
-
-declare global {
-    interface Window {
-        onSpotifyIframeApiReady: (IFrameAPI: IFrameAPI) => void;
-    }
-}
+import { fetchTopTracks } from '../../libs/fetchAPI';
+import { TopList } from '../TopList';
 
 export default function Tracks() {
     const { topTracks, setTopTracks } = useTracksStore();
-    const timeRanges: string[] = useMemo(() => ['short_term', 'medium_term', 'long_term'], []);
     const [ timeRange, setTimeRange ] = useState<TimeRange>('short_term')
 
     useEffect(() => {
-        async function fetchTopTracks() {
+        async function fetchData() {
             if (!topTracks) {
                 try {
-                    const topTracksDataByTimeRange: Record<string, any> = {};
-    
-                    await Promise.all(
-                        timeRanges.map(async (timeRange) => {
-                            const response = await api(`me/top/tracks?time_range=${timeRange}&limit=50`);
-                            topTracksDataByTimeRange[timeRange] = response?.data.items;
-                        })
-                    );
+                    const topTracksDataByTimeRange = await fetchTopTracks();
                     setTopTracks(topTracksDataByTimeRange);
-                    
                 } catch (error: any) {
                     console.log(error)
                 }
             }
         }
 
-        fetchTopTracks()
-    }, [topTracks, setTopTracks, timeRanges]);
+        fetchData()
+    }, [topTracks, setTopTracks]);
     
     const handleTimeRangePlay = (time: TimeRange) => {
         setTimeRange(time)
     }
+
+    console.log(topTracks);
 
     return (
         <div>
@@ -80,7 +44,7 @@ export default function Tracks() {
                         </div>
                         {/* <ImageEditor timeRange={timeRange}/>  */}
                         <div>
-                            <TopList2 listItems={topTracks} timeRangePlayList={handleTimeRangePlay} type="track"/>
+                            <TopList listItems={topTracks} timeRangePlayList={handleTimeRangePlay} type="track"/>
                         </div>
                     </div>
                 </>

@@ -1,5 +1,5 @@
 // artistAPI.ts
-import { AxiosResponse } from 'axios'; // Importe os tipos apropriados para o Axios
+import { AxiosResponse } from 'axios';
 import api from './api';
 
 interface DataByTimeRange {
@@ -20,3 +20,17 @@ export async function fetchTopArtist(): Promise<DataByTimeRange> {
 
   return topArtistDataByTimeRange;
 }
+
+
+export async function fetchTopTracks(): Promise<DataByTimeRange> {
+    const topTracksDataByTimeRange: DataByTimeRange = {};
+  
+    await Promise.all(
+      timeRanges.map(async (timeRange) => {
+        const response: AxiosResponse = await api(`me/top/tracks?time_range=${timeRange}&limit=50`);
+        topTracksDataByTimeRange[timeRange] = response?.data.items;
+      })
+    );
+  
+    return topTracksDataByTimeRange;
+  }

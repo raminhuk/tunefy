@@ -1,6 +1,4 @@
-import { track } from '@amplitude/analytics-browser';
 import React, { useEffect, useState } from 'react';
-import { BsPauseCircleFill, BsPlayCircleFill } from 'react-icons/bs';
 import { useTracksStore } from '../store/tracksStore';
 
 interface IFrameAPI {
