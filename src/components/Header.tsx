@@ -63,11 +63,46 @@ export function Header() {
                             </span>
                         </div>
                         <nav className={`lg:flex-row flex-col flex lg:relative text-sm lg:text-base text-gray-400 lg:text-gray-100`}>
-                            <Link onClick={toggleMobileMenu} href="/" className="lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 hover:text-gray-400">Principal</Link>
-                            <Link onClick={toggleMobileMenu} href="/tracks" className="lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 hover:text-gray-400">Top Músicas</Link>
-                            <Link onClick={toggleMobileMenu} href="/artists" className="lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 hover:text-gray-400">Top Artistas</Link>
-                            <Link onClick={toggleMobileMenu} href="/genres" className="lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 hover:text-gray-400">Top Generos</Link>
-                            <Link onClick={toggleMobileMenu} href="/recently" className="lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 hover:text-gray-400">Últimas Ouvidas</Link>
+                            <Link
+                                onClick={toggleMobileMenu}
+                                href="/"
+                                className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
+                            >
+                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/' ? 'block' : 'hidden' } group-hover:block`}></span>
+                                Principal
+                            </Link>
+                            <Link 
+                                onClick={toggleMobileMenu}
+                                href="/tracks"
+                                className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
+                            >
+                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/tracks' ? 'block' : 'hidden' } group-hover:block`}></span>
+                                Top Músicas
+                            </Link>
+                            <Link
+                                onClick={toggleMobileMenu}
+                                href="/artists"
+                                className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
+                            >
+                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/artists' ? 'block' : 'hidden' } group-hover:block`}></span>
+                                Top Artistas
+                            </Link>
+                            <Link
+                                onClick={toggleMobileMenu}
+                                href="/genres"
+                                className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
+                            >
+                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/genres' ? 'block' : 'hidden' } group-hover:block`}></span>
+                                Top Generos
+                            </Link>
+                            <Link
+                                onClick={toggleMobileMenu}
+                                href="/recently"
+                                className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
+                            >
+                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/recently' ? 'block' : 'hidden' } group-hover:block`}></span>
+                                Últimas Ouvidas
+                            </Link>
                         </nav>
                     </div>
                     <span onClick={toggleMobileMenu} className="lg:hidden block absolute left-0 top-0 w-full h-screen bg-black bg-opacity-60"></span>

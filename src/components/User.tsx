@@ -39,7 +39,7 @@ export default function User() {
         }
     }, [setUser]);
 
-    var userProperties = {
+    const userProperties = {
         "id_spotify": user?.id || null,
         "name": user?.display_name || null,
         "email": user?.email || null,
@@ -48,7 +48,7 @@ export default function User() {
     identifyAmplitudeEvent(userProperties)
     return (
         <>
-            <div className="cursor-pointer relative rounded-full" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
+            <div className="cursor-pointer z-10 relative rounded-full" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
                 <div className="flex rounded-full overflow-hidden items-center gap-3 text-xs bg-gradient-to-r from-customPink to-customBlue p-0.5">
                     <div className="lg:w-10 lg:h-10 w-8 h-8 rounded-full overflow-hidden">
                         {user ? (
