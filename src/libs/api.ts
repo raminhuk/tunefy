@@ -29,7 +29,13 @@ api.interceptors.response.use(
         } else {
             console.log(`Oops: ${error}`);
         }
-        window.location.href = '/login';
+
+        if (typeof window !== 'undefined') {
+            const path = localStorage.getItem('path');
+            if (path !== '/'){
+                window.location.href = '/login';
+            }
+        }
         return Promise.reject(error);
     }
 );
