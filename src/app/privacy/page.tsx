@@ -2,11 +2,12 @@ import NavBar from "../../components/ui/NavBar";
 
 export default function Page() {
   return (
-    <div className="max-w-7xl w-11/12 mx-auto mt-10">
+    <div className="max-w-7xl w-11/12 mx-auto">
         <div className="flex">
             <NavBar/>
             <div className="flex flex-1 flex-col">
                 <h1 className="text-center font-semibold text-2xl tracking-wider mb-6">Quem somos</h1>
+
 
                 <div className="rounded-lg shadow-lg text-justify">
       <p className="mb-4">

@@ -68,7 +68,7 @@ export function Header() {
                                 href="/"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
                             >
-                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/' ? 'block' : 'hidden' } group-hover:block`}></span>
+                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/' ? 'lg:block hidden' : 'hidden' } group-hover:block`}></span>
                                 Principal
                             </Link>
                             <Link 
@@ -76,7 +76,7 @@ export function Header() {
                                 href="/tracks"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
                             >
-                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/tracks' ? 'block' : 'hidden' } group-hover:block`}></span>
+                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/tracks' ? 'lg:block hidden' : 'hidden' } group-hover:block`}></span>
                                 Top Músicas
                             </Link>
                             <Link
@@ -84,7 +84,7 @@ export function Header() {
                                 href="/artists"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
                             >
-                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/artists' ? 'block' : 'hidden' } group-hover:block`}></span>
+                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/artists' ? 'lg:block hidden' : 'hidden' } group-hover:block`}></span>
                                 Top Artistas
                             </Link>
                             <Link
@@ -92,7 +92,7 @@ export function Header() {
                                 href="/genres"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
                             >
-                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/genres' ? 'block' : 'hidden' } group-hover:block`}></span>
+                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/genres' ? 'lg:block hidden' : 'hidden' } group-hover:block`}></span>
                                 Top Generos
                             </Link>
                             <Link
@@ -100,7 +100,7 @@ export function Header() {
                                 href="/recently"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
                             >
-                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/recently' ? 'block' : 'hidden' } group-hover:block`}></span>
+                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/recently' ? 'lg:block hidden' : 'hidden' } group-hover:block`}></span>
                                 Últimas Ouvidas
                             </Link>
                         </nav>
