@@ -5,7 +5,7 @@ import { FiExternalLink } from "react-icons/fi";
 import TimeRenges from "./TimeRanges";
 import { useState } from "react";
 import { useTracksStore } from "../store/tracksStore";
-import Equalizer from "./ui/Equalizer";
+import Equalizer from "./UI/Equalizer";
 
 interface TopListProps {
     listItems: Record<string, any> | null;
