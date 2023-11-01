@@ -1,7 +1,7 @@
 'use client'
 import { Nunito_Sans } from 'next/font/google';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import User from './User';
 import Link from 'next/link';
 import { MdClose } from "react-icons/md";
@@ -21,7 +21,7 @@ interface HeaderProps {
 
 export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    
+    const line = useRef<HTMLSpanElement | null>(null);
     const pathname = usePathname()
     if (pathname !== '/callback' && pathname !== '/login') {
         saveLocalStorage('path', pathname);
@@ -31,6 +31,16 @@ export function Header() {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
+
+   
+    const handleMouseOver = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        const linkTarget = event.currentTarget
+        console.log(event);
+        if (line.current) {
+            line.current.style.width = `${linkTarget.clientWidth}px`;
+            line.current.style.transform = `translateX(${linkTarget.offsetLeft}px)`;
+          }
+      };
 
     return (
         <header className="text-white relative z-20">
@@ -63,44 +73,54 @@ export function Header() {
                             </span>
                         </div>
                         <nav className={`lg:flex-row flex-col flex lg:relative text-sm lg:text-base text-gray-400 lg:text-gray-100`}>
+                            <span
+                                ref={line}
+                                className={`
+                                    w-0 h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue
+                                    transform-origin-left transform transition-transform duration-500
+                                    ${pathname === '/' ? 'lg:block hidden' : 'hidden'} group-hover:block
+                                `}
+                            >
+                                
+                            </span>
                             <Link
                                 onClick={toggleMobileMenu}
                                 href="/"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
+                                onMouseOver={handleMouseOver}
                             >
-                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/' ? 'lg:block hidden' : 'hidden' } group-hover:block`}></span>
                                 Principal
                             </Link>
-                            <Link 
+                            <Link
                                 onClick={toggleMobileMenu}
                                 href="/tracks"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
+                                onMouseOver={handleMouseOver}
                             >
-                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/tracks' ? 'lg:block hidden' : 'hidden' } group-hover:block`}></span>
                                 Top Músicas
                             </Link>
                             <Link
                                 onClick={toggleMobileMenu}
                                 href="/artists"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
+                                onMouseOver={handleMouseOver}
                             >
-                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/artists' ? 'lg:block hidden' : 'hidden' } group-hover:block`}></span>
                                 Top Artistas
                             </Link>
                             <Link
                                 onClick={toggleMobileMenu}
                                 href="/genres"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
+                                onMouseOver={handleMouseOver}
                             >
-                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/genres' ? 'lg:block hidden' : 'hidden' } group-hover:block`}></span>
                                 Top Generos
                             </Link>
                             <Link
                                 onClick={toggleMobileMenu}
                                 href="/recently"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
+                                onMouseOver={handleMouseOver}
                             >
-                                <span className={`w-full h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue ${pathname === '/recently' ? 'lg:block hidden' : 'hidden' } group-hover:block`}></span>
                                 Últimas Ouvidas
                             </Link>
                         </nav>
