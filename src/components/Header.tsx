@@ -29,28 +29,24 @@ export function Header() {
     }
 
     useEffect(() => {
-        const linkInitial = document.querySelector(`[href='${pathname}']`) as HTMLAnchorElement;
-        if (linkInitial){
-            if (line.current) {
-                line.current.style.width = `${linkInitial.clientWidth}px`;
-                line.current.style.transform = `translateX(${linkInitial.offsetLeft}px)`;
-                setPosition(
-                    {
-                        "width": linkInitial.clientWidth+'px',
-                        "left": linkInitial.offsetLeft+'px'
-                    }
-                )
-            }
+        const linkInitial = document.querySelector(`nav [href='${pathname}']`) as HTMLAnchorElement;
+        if (line.current && linkInitial) {
+            line.current.style.width = `${linkInitial.clientWidth}px`;
+            line.current.style.transform = `translateX(${linkInitial.offsetLeft}px)`;
+            setPosition(
+                {
+                    "width": linkInitial.clientWidth+'px',
+                    "left": linkInitial.offsetLeft+'px'
+                }
+            )
         }
+       
     }, [pathname]);
-
-    
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
-   
     const handleMouseOver = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         const linkTarget = event.currentTarget
         if (line.current) {
