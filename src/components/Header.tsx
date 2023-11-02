@@ -9,12 +9,10 @@ import { saveLocalStorage } from '../utils/savelocalStorage';
 import { usePathname } from 'next/navigation';
 import { PlayTrack } from './PlayTrack';
 
-
 const nunito = Nunito_Sans({
     weight: ['200', '400', '600', '800'],
     subsets: ['latin'],
 })
-
 interface HeaderProps {
     onLoginClick?: () => void;
 }
@@ -97,7 +95,7 @@ export function Header() {
                                 ref={line}
                                 className={`
                                     w-0 h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue
-                                    transform-origin-left transform transition-transform duration-500
+                                    transform transition-all duration-500
                                 `}
                             >
                                 

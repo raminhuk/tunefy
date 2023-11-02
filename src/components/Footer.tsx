@@ -11,7 +11,7 @@ const nunito = Nunito_Sans({
 export function Footer() {
     return (
         
-    <footer className="bg-gray-900 shadow mt-10">
+    <footer className="bg-zinc-950 shadow mt-10">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
             <div className="sm:flex sm:items-center sm:justify-between">
                 <Link href="/" className="flex items-center gap-2">
