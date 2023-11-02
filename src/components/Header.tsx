@@ -1,7 +1,7 @@
 'use client'
 import { Nunito_Sans } from 'next/font/google';
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import User from './User';
 import Link from 'next/link';
 import { MdClose } from "react-icons/md";
@@ -21,12 +21,30 @@ interface HeaderProps {
 
 export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [position, setPosition] = useState({"width": '0px',"left": '0px'});
     const line = useRef<HTMLSpanElement | null>(null);
     const pathname = usePathname()
     if (pathname !== '/callback' && pathname !== '/login') {
         saveLocalStorage('path', pathname);
     }
 
+    useEffect(() => {
+        const linkInitial = document.querySelector(`[href='${pathname}']`) as HTMLAnchorElement;
+        if (linkInitial){
+            if (line.current) {
+                line.current.style.width = `${linkInitial.clientWidth}px`;
+                line.current.style.transform = `translateX(${linkInitial.offsetLeft}px)`;
+                setPosition(
+                    {
+                        "width": linkInitial.clientWidth+'px',
+                        "left": linkInitial.offsetLeft+'px'
+                    }
+                )
+            }
+        }
+    }, [pathname]);
+
+    
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -35,12 +53,18 @@ export function Header() {
    
     const handleMouseOver = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         const linkTarget = event.currentTarget
-        console.log(event);
         if (line.current) {
             line.current.style.width = `${linkTarget.clientWidth}px`;
             line.current.style.transform = `translateX(${linkTarget.offsetLeft}px)`;
-          }
-      };
+        }
+    };
+
+    const handleMouseOut = () => {
+        if (line.current) {
+            line.current.style.width = `${position.width}`;
+            line.current.style.transform = `translateX(${position.left})`;
+        }
+    };
 
     return (
         <header className="text-white relative z-20">
@@ -78,7 +102,6 @@ export function Header() {
                                 className={`
                                     w-0 h-1 absolute bottom-0 left-0 bg-gradient-to-r from-customPink via-customPink2 to-customBlue
                                     transform-origin-left transform transition-transform duration-500
-                                    ${pathname === '/' ? 'lg:block hidden' : 'hidden'} group-hover:block
                                 `}
                             >
                                 
@@ -88,6 +111,7 @@ export function Header() {
                                 href="/"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
                                 onMouseOver={handleMouseOver}
+                                onMouseOut={handleMouseOut}
                             >
                                 Principal
                             </Link>
@@ -96,6 +120,7 @@ export function Header() {
                                 href="/tracks"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
                                 onMouseOver={handleMouseOver}
+                                onMouseOut={handleMouseOut}
                             >
                                 Top Músicas
                             </Link>
@@ -104,6 +129,7 @@ export function Header() {
                                 href="/artists"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
                                 onMouseOver={handleMouseOver}
+                                onMouseOut={handleMouseOut}
                             >
                                 Top Artistas
                             </Link>
@@ -112,6 +138,7 @@ export function Header() {
                                 href="/genres"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
                                 onMouseOver={handleMouseOver}
+                                onMouseOut={handleMouseOut}
                             >
                                 Top Generos
                             </Link>
@@ -120,6 +147,7 @@ export function Header() {
                                 href="/recently"
                                 className="relative lg:border-none border-b border-gray-100 border-solid px-6 py-4 lg:px-6 lg:py-8 lg:px-4 group"
                                 onMouseOver={handleMouseOver}
+                                onMouseOut={handleMouseOut}
                             >
                                 Últimas Ouvidas
                             </Link>
