@@ -29,7 +29,7 @@ const LoginButton = () => {
                             className="w-full h-full object-cover cursor-pointer"
                         />
                     </div>
-                    Top Músicas
+                    Top Tracks
                 </button>
                 </Link>
                 

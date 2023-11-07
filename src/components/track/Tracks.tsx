@@ -38,7 +38,7 @@ export default function Tracks() {
                     <div className="max-w-5xl w-11/12 mx-auto mt-8">
                         <CreatePlaylist timeRange={timeRange}/>
                         <div className="text-center max-w-7xl mx-auto">
-                            <h1 className="font-semibold text-xl tracking-wider py-2 mb-2">Top Músicas</h1>
+                            <h1 className="font-semibold text-xl tracking-wider py-2 mb-2">Top Tracks</h1>
                         </div>
                         {/* <ImageEditor timeRange={timeRange}/>  */}
                         <div>

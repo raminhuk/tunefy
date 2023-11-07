@@ -29,7 +29,7 @@ export default function Artists() {
                 <>
                     <div className="max-w-5xl w-11/12 mx-auto mt-8">
                         <div className="text-center max-w-7xl mx-auto">
-                            <h1 className="font-semibold text-xl tracking-wider py-2 mb-2">Top Artistas</h1>
+                            <h1 className="font-semibold text-xl tracking-wider py-2 mb-2">Top Artists</h1>
                         </div>
                         <div>
                             <TopList listItems={topArtist} type="artist"/>

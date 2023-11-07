@@ -71,7 +71,9 @@ export default function User() {
                     <div className="absolute top-0 right-0 pt-14">
                         <div className="relative text-black w-48 text-xs bg-white border border-gray-200 rounded shadow-md">
                             <span className="rounded-sm absolute rotate-45 -top-1 right-1.5 w-6 h-6 bg-white"></span>
-                            <p className="font-semibold p-3">Olá, {user?.display_name}</p>
+                            { user && (
+                                <p className="font-semibold p-3">Hi, { user?.display_name }</p>
+                            )}
                             <hr />
                             <ul>
                                 <li>

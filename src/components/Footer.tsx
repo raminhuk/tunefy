@@ -20,21 +20,21 @@ export function Footer() {
                 </Link>
                 <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                     <li>
-                        <Link href="/" className="lg:px-6 py-8 px-4 hover:text-gray-400">Quem Somos</Link>
+                        <Link href="/" className="lg:px-6 py-8 px-4 hover:text-customPink2">About</Link>
                     </li>
                     <li>
-                        <Link href="/" className="lg:px-6 py-8 px-4 hover:text-gray-400">Política e privacidade</Link>
+                        <Link href="/" className="lg:px-6 py-8 px-4 hover:text-customPink2">Privacy Policy</Link>
                     </li>
                     <li>
-                        <Link href="/" className="lg:px-6 py-8 px-4 hover:text-gray-400">Faq</Link>
+                        <Link href="/" className="lg:px-6 py-8 px-4 hover:text-customPink2">Faq</Link>
                     </li>
                     <li>
-                        <Link href="/" className="lg:px-6 py-8 px-4 hover:text-gray-400">Contato</Link>
+                        <Link href="/" className="lg:px-6 py-8 px-4 hover:text-customPink2">Contact</Link>
                     </li>
                 </ul>
             </div>
-            <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-800 lg:my-8" />
-            <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <Link href="/" className="hover:underline">TuneFy</Link>. All Rights Reserved.</span>
+            <hr className="my-6 border-zinc-900 sm:mx-auto lg:my-8" />
+            <span className="block text-sm sm:text-center text-gray-400">© 2023 <Link href="/" className="hover:underline">TuneFy</Link>. All Rights Reserved.</span>
         </div>
     </footer>
 

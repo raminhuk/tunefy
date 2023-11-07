@@ -87,27 +87,27 @@ export function CreatePlaylist({ timeRange }: CreatePlaylistProps) {
         <div className="mb-8 overflow-hidden relative flex flex-col md:flex-row md:px-10 md:py-16 p-3 justify-between items-center rounded-md border border-black">
             {loading && <LoadingSpinner/>}
             <span className="md:w-2/3 max-w-md font-semibold tracking-wide md:text-2xl text-sm mb-8">
-                Crie uma playlist com as mais ouvidas por você!<br />
+                Assemble a playlist of your favorite tunes!!<br />
                 <span className="text-xs md:text-sm font-normal">
-                    Período selecionado:
+                    Selected period:
                     <span className="bg-gradient-to-r from-customPink to-customBlue text-xs font-normal mx-2 p-1 rounded-md">
                         {timeRangeName(timeRange)}
                     </span>
                 </span>
                 {playList && (
                     <div className="flex items-center flex-col md:items-start gap-2 mt-6">
-                        <span className="text-sm">Playlist Criada:</span>
+                        <span className="text-sm">Playlist created:</span>
                         <div className="text-sm flex items-center gap-2">
                             <a target="_blank" href={`${playList.link}`}>
                                 <button
                                     className="flex items-center gap-2 bg-green-500 text-black rounded-full md:px-8 md:py-3 px-6 py-2 border-b-4 border-b-green-700 md:text-md text-sm font-semibold border-em hover:bg-green-600">
-                                    <FaSpotify size={16}/> Abrir no Spotify 
+                                    <FaSpotify size={16}/> Open on Spotify
                                 </button>
                             </a> 
                             <button
                                 onClick={(e) => {playPlayList(`${playList.uri}`)}}
                                 className="flex items-center gap-2 bg-green-500 text-black rounded-full md:px-8 md:py-3 px-6 py-2 border-b-4 border-b-green-700 md:text-md text-sm font-semibold border-em hover:bg-green-600">
-                                  <BiPlayCircle size={20} />  Ouvir aqui
+                                  <BiPlayCircle size={20} />  Listen here
                             </button>
                         </div>
                     </div>
@@ -116,7 +116,7 @@ export function CreatePlaylist({ timeRange }: CreatePlaylistProps) {
             <button
                 onClick={handleCreatePlaylist}
                 className="flex items-center gap-2 bg-green-500 text-black rounded-full md:px-8 md:py-3 px-6 py-2 border-b-4 border-b-green-700 md:text-md text-sm font-semibold border-em hover:bg-green-600">
-                Criar Playist
+                Create playlist
             </button>
             <div className="flex items-center w-full h-full absolute top-0 left-0 -z-10 bg-cover bg-center bg-[url('/music3.jpg')]">
                 <span className="z-10 overflow-hidden opacity-80 absolute top-0 left-0 w-full h-full bg-gradient-to-r from-zinc-900 to-zinc-900"></span>

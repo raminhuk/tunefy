@@ -107,7 +107,7 @@ export function Header() {
                                 onMouseOver={handleMouseOver}
                                 onMouseOut={handleMouseOut}
                             >
-                                Principal
+                                Home
                             </Link>
                             <Link
                                 onClick={toggleMobileMenu}
@@ -116,7 +116,7 @@ export function Header() {
                                 onMouseOver={handleMouseOver}
                                 onMouseOut={handleMouseOut}
                             >
-                                Top Músicas
+                                Top Tracks
                             </Link>
                             <Link
                                 onClick={toggleMobileMenu}
@@ -125,7 +125,7 @@ export function Header() {
                                 onMouseOver={handleMouseOver}
                                 onMouseOut={handleMouseOut}
                             >
-                                Top Artistas
+                                Top Artists
                             </Link>
                             <Link
                                 onClick={toggleMobileMenu}
@@ -134,7 +134,7 @@ export function Header() {
                                 onMouseOver={handleMouseOver}
                                 onMouseOut={handleMouseOut}
                             >
-                                Top Generos
+                                Top Genres
                             </Link>
                             <Link
                                 onClick={toggleMobileMenu}
@@ -143,7 +143,7 @@ export function Header() {
                                 onMouseOver={handleMouseOver}
                                 onMouseOut={handleMouseOut}
                             >
-                                Últimas Ouvidas
+                                Recently Played
                             </Link>
                         </nav>
                     </div>
