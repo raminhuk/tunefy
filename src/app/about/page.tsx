@@ -10,10 +10,10 @@ export default function Page() {
 
                     <div className="rounded-lg shadow-lg text-justify">
                         <p className="mb-4">
-                            We are passionate about music, and we believe that everyone's life soundtrack is unique and special. That's why we created Tunefy, a platform dedicated to providing you with a unique view of your musical journey on Spotify.
+                            We are passionate about music, and we believe that everyone`s life soundtrack is unique and special. That&apos;s why we created Tunefy, a platform dedicated to providing you with a unique view of your musical journey on Spotify.
                         </p>
                         <p className="mb-4">
-                            Our mission is simple: we want you to feel more connected to the music you love. Whether you're a long-time music enthusiast or someone who has just started exploring the world of music, Tunefy is here to celebrate your musical journey.
+                            Our mission is simple: we want you to feel more connected to the music you love. Whether you&apos;re a long-time music enthusiast or someone who has just started exploring the world of music, Tunefy is here to celebrate your musical journey.
                         </p>
                         <p className="mb-4">
                             <strong className="text-xl">What We Do</strong>
@@ -36,13 +36,13 @@ export default function Page() {
                             Our commitment is to make music a more meaningful part of your life, connecting you to the beats and lyrics that make your heart resonate.
                         </p>
                         <p className="mb-4">
-                            <strong className="text-xl">Who's Behind Tunefy</strong>
+                            <strong className="text-xl">Who&apos;s Behind Tunefy</strong>
                         </p>
                         <p className="mb-4">
                             Our team consists of a diverse group of music enthusiasts, creative developers, and passionate designers. We all share the same goal: to bring a personalized and engaging musical experience to you.
                         </p>
                         <p className="mb-4">
-                            We're always listening to the feedback and suggestions from our users because we believe that music is a continuous journey that evolves over time, just like we do.
+                            We&apos;re always listening to the feedback and suggestions from our users because we believe that music is a continuous journey that evolves over time, just like we do.
                         </p>
                         <p className="mb-4">
                             Join us on Tunefy and discover the power of music to connect, move, and inspire. Your personal soundtrack is just a click away, ready to play a significant role in your story.

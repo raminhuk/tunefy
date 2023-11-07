@@ -15,7 +15,7 @@ export default function Page() {
                         <p className="mb-4">We collect the following types of information:</p>
 
                         <ul className="list-disc pl-6 mb-4">
-                            <li>Spotify Data: When you log in with your Spotify account, we obtain access to the following permissions: 'user-top-read,' 'streaming,' 'user-read-email,' 'user-read-private,' 'playlist-modify-public,' 'playlist-modify-private,' and 'user-read-recently-played.' We use this data to provide personalized music recommendations, such as your top tracks and artists, favorite genres, and recently played songs.</li>
+                            <li>Spotify Data: When you log in with your Spotify account, we obtain access to the following permissions: &apos;user-top-read,&apos; &apos;streaming,&apos; &apos;user-read-email,&apos; &apos;user-read-private,&apos; &apos;playlist-modify-public,&apos; &apos;playlist-modify-private,&apos; and &apos;user-read-recently-played.&apos; We use this data to provide personalized music recommendations, such as your top tracks and artists, favorite genres, and recently played songs.</li>
                             <li>Google Analytics Data: We collect data on user behavior and interactions within our application using Google Analytics. This helps us improve the user experience and identify areas for enhancement.</li>
                             <li>Amplify Data: Amplify is used to gather certain user information for better interaction and functionality within our application.</li>
                         </ul>
@@ -25,7 +25,7 @@ export default function Page() {
 
                         <ul className="list-disc pl-6 mb-4">
                             <li>To provide you with personalized music recommendations and insights based on your Spotify usage.</li>
-                            <li>To analyze and improve our application's performance, features, and user experience.</li>
+                            <li>To analyze and improve our application&apos;s performance, features, and user experience.</li>
                             <li>To communicate with you about updates, new features, and promotions related to our application.</li>
                         </ul>
 
