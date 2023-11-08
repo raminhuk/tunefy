@@ -2,6 +2,8 @@ import { Nunito_Sans } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import SocialMediaLinks from './UI/SocialMedia';
+import SocialMedia from './UI/SocialMedia';
 
 const nunito = Nunito_Sans({
     weight: ['200', '400', '600', '800'],
@@ -33,7 +35,10 @@ export function Footer() {
                     </li>
                 </ul>
             </div>
+            <div>
+            </div>
             <hr className="my-6 border-zinc-900 sm:mx-auto lg:my-8" />
+            <SocialMedia />
             <span className="block text-sm sm:text-center text-gray-400">© 2023 <Link href="/" className="hover:underline">TuneFy</Link>. All Rights Reserved.</span>
         </div>
     </footer>
