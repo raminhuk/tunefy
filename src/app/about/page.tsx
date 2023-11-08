@@ -16,7 +16,7 @@ export default function Page() {
                             Our mission is simple: we want you to feel more connected to the music you love. Whether you&apos;re a long-time music enthusiast or someone who has just started exploring the world of music, Tunefy is here to celebrate your musical journey.
                         </p>
                         <p className="mb-4">
-                            <strong className="text-xl">What We Do</strong>
+                            <h2 className="text-xl font-semibold mb-2">What We Do</h2>
                         </p>
                         <p className="mb-4">
                             Tunefy is a space where music lovers can dive deep into their own musical experience. We offer a range of features that reveal your relationship with music on Spotify in a unique way:
@@ -36,7 +36,7 @@ export default function Page() {
                             Our commitment is to make music a more meaningful part of your life, connecting you to the beats and lyrics that make your heart resonate.
                         </p>
                         <p className="mb-4">
-                            <strong className="text-xl">Who&apos;s Behind Tunefy</strong>
+                            <h2 className="text-xl font-semibold mb-2">Who&apos;s Behind Tunefy</h2>
                         </p>
                         <p className="mb-4">
                             Our team consists of a diverse group of music enthusiasts, creative developers, and passionate designers. We all share the same goal: to bring a personalized and engaging musical experience to you.

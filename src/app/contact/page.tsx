@@ -3,56 +3,44 @@ import NavBar from "../../components/UI/NavBar";
 export default function Page() {
   return (
     <div className="max-w-7xl w-11/12 mx-auto mt-10">
-        <div className="flex">
-            <NavBar/>
-            <div className="flex flex-1 flex-col">
-                <h1 className="text-center font-semibold text-2xl tracking-wider mb-6">Quem somos</h1>
+        Building
 
-                <div className="rounded-lg shadow-lg text-justify">
-      <p className="mb-4">
-        Somos apaixonados por música, e acreditamos que a trilha sonora da vida de cada um é única e especial. É por isso que criamos o Tunefy, uma plataforma dedicada a proporcionar a você uma visão única de sua jornada musical no Spotify.
-      </p>
-      <p className="mb-4">
-        Nossa missão é simples: queremos que você se sinta mais conectado com a música que ama. Seja você um melômano de longa data ou alguém que apenas começou a explorar o mundo da música, o Tunefy está aqui para celebrar sua jornada sonora.
-      </p>
-      <p className="mb-4">
-        <strong className="text-xl">O que fazemos</strong>
-      </p>
-      <p className="mb-4">
-        O Tunefy é um espaço onde os amantes da música podem mergulhar profundamente em sua própria experiência musical. Oferecemos uma série de recursos que revelam o seu relacionamento com a música no Spotify de maneira única:
-      </p>
-      <ul className="mb-4 list-inside">
-        <li>
-          <strong>Top Músicas e Artistas:</strong> Descubra as músicas que mais aquecem o seu coração e os artistas que transformam seus momentos especiais em memórias inesquecíveis.
-        </li>
-        <li>
-          <strong>Gêneros Prediletos:</strong> Saiba quais gêneros musicais ocupam um lugar especial em seu coração e enriquecem sua vida.
-        </li>
-        <li>
-          <strong>Últimas Audições:</strong> Reviva os momentos recentes em que você se perdeu na melodia e na letra de suas músicas favoritas.
-        </li>
-      </ul>
-      <p className="mb-4">
-        Nosso compromisso é tornar a música uma parte mais significativa de sua vida, conectando você às batidas e letras que fazem o seu coração vibrar.
-      </p>
-      <p className="mb-4">
-        <strong className="text-xl">Quem está por trás do Tunefy</strong>
-      </p>
-      <p className="mb-4">
-        Nossa equipe é formada por um grupo diversificado de entusiastas da música, desenvolvedores criativos e designers apaixonados. Todos compartilhamos o mesmo objetivo: trazer uma experiência musical personalizada e envolvente para você.
-      </p>
-      <p className="mb-4">
-        Estamos sempre ouvindo os feedbacks e sugestões de nossos usuários, pois acreditamos que a música é uma jornada contínua que evolui com o tempo, assim como nós.
-      </p>
-      <p className="mb-4">
-        Junte-se a nós no Tunefy e descubra o poder da música para conectar, emocionar e inspirar. Sua trilha sonora pessoal está a um clique de distância, pronta para desempenhar um papel importante em sua história.
-      </p>
-      <p className="mb-4">
-        Bem-vindo ao Tunefy, o ritmo da sua vida, a um toque de distância.
-      </p>
-    </div>
-            </div>
-        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1080" height="1920" preserveAspectRatio="none" viewBox="0 0 1080 1920">
+    <g mask="url(&quot;#SvgjsMask7884&quot;)" fill="none">
+        <rect width="1080" height="1920" x="0" y="0" fill="#0e2a47"></rect>
+        <path d="M718.11 1543.56a5.6 5.6 0 1 0 7.03 8.71 5.6 5.6 0 1 0-7.03-8.71zM728.16 1556.01a5.6 5.6 0 1 0 7.03 8.71 5.6 5.6 0 1 0-7.03-8.71zM738.21 1568.46a5.6 5.6 0 1 0 7.03 8.71 5.6 5.6 0 1 0-7.03-8.71zM748.26 1580.91a5.6 5.6 0 1 0 7.03 8.71 5.6 5.6 0 1 0-7.03-8.71z" fill="#037b0b"></path>
+        <rect width="141.24" height="141.24" clip-path="url(&quot;#SvgjsClipPath7885&quot;)" x="765.2" y="636.3" fill="url(&quot;#SvgjsPattern7886&quot;)" transform="rotate(57.89, 835.82, 706.92)"></rect>
+        <circle r="128.93827357914563" cx="134.19" cy="1290.75" fill="rgba(227, 0, 221, 1)"></circle>
+        <circle r="90" cx="627.02" cy="205.2" fill="rgba(3, 87, 255, 1)"></circle>
+        <rect width="631.8399999999999" height="631.8399999999999" clip-path="url(&quot;#SvgjsClipPath7887&quot;)" x="750.36" y="960.12" fill="url(&quot;#SvgjsPattern7888&quot;)" transform="rotate(180.47, 1066.28, 1276.04)"></rect>
+        <rect width="619.36" height="619.36" clip-path="url(&quot;#SvgjsClipPath7889&quot;)" x="259.67" y="1486.63" fill="url(&quot;#SvgjsPattern7890&quot;)" transform="rotate(308.73, 569.35, 1796.31)"></rect>
+        <path d="M844.65 1621.94L833.14 1616.32 836.1 1603.86 824.6 1598.23 827.56 1585.77 816.05 1580.15 819.02 1567.69" stroke="#d3b714" stroke-width="1" stroke-dasharray="4, 4"></path>
+        <circle r="90" cx="1063.15" cy="916.96" fill="#037b0b"></circle>
+    </g>
+    <defs>
+        <mask id="SvgjsMask7884">
+            <rect width="1080" height="1920" fill="#ffffff"></rect>
+        </mask>
+        <pattern x="0" y="0" width="6.42" height="6.42" patternUnits="userSpaceOnUse" id="SvgjsPattern7886">
+            <path d="M0 6.42L3.21 0L6.42 6.42" stroke="#e73635" fill="none"></path>
+        </pattern>
+        <clipPath id="SvgjsClipPath7885">
+            <circle r="35.31" cx="835.82" cy="706.92"></circle>
+        </clipPath>
+        <pattern x="0" y="0" width="7.18" height="7.18" patternUnits="userSpaceOnUse" id="SvgjsPattern7888">
+            <path d="M0 7.18L3.59 0L7.18 7.18" stroke="rgba(3, 87, 255, 1)" fill="none"></path>
+        </pattern>
+        <clipPath id="SvgjsClipPath7887">
+            <circle r="157.95999999999998" cx="1066.28" cy="1276.04"></circle>
+        </clipPath>
+        <pattern x="0" y="0" width="11.06" height="11.06" patternUnits="userSpaceOnUse" id="SvgjsPattern7890">
+            <path d="M0 11.06L5.53 0L11.06 11.06" stroke="#e73635" fill="none"></path>
+        </pattern>
+        <clipPath id="SvgjsClipPath7889">
+            <circle r="154.84" cx="569.35" cy="1796.31"></circle>
+        </clipPath>
+    </defs>
+</svg>
     </div>
   )
 }

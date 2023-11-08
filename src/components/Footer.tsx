@@ -20,16 +20,16 @@ export function Footer() {
                 </Link>
                 <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                     <li>
-                        <Link href="/" className="lg:px-6 py-8 px-4 hover:text-customPink2">About</Link>
+                        <Link href="/about" className="lg:px-6 py-8 px-4 hover:text-customPink2">About</Link>
                     </li>
                     <li>
-                        <Link href="/" className="lg:px-6 py-8 px-4 hover:text-customPink2">Privacy Policy</Link>
+                        <Link href="/privacy" className="lg:px-6 py-8 px-4 hover:text-customPink2">Privacy Policy</Link>
                     </li>
                     <li>
-                        <Link href="/" className="lg:px-6 py-8 px-4 hover:text-customPink2">Faq</Link>
+                        <Link href="/faq" className="lg:px-6 py-8 px-4 hover:text-customPink2">Faq</Link>
                     </li>
                     <li>
-                        <Link href="/" className="lg:px-6 py-8 px-4 hover:text-customPink2">Contact</Link>
+                        <Link href="/contact" className="lg:px-6 py-8 px-4 hover:text-customPink2">Contact</Link>
                     </li>
                 </ul>
             </div>
