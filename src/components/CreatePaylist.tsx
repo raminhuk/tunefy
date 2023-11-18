@@ -6,10 +6,10 @@ import { useTracksStore } from "../store/tracksStore";
 import { useUserStore } from "../store/userStore";
 import { timeRangeName } from "../utils/timeRangeName";
 import { useState } from "react";
-import LoadingSpinner from "./Loading";
 import { FaSpotify } from "react-icons/fa";
 import { BiPlayCircle } from "react-icons/bi";
 import { trackAmplitudeEvent } from "../utils/amplitude";
+import LoadingSpinner from "./UI/Loading";
 
 type PlaylistAddTracksItem = {
     uris: string[];

@@ -1,9 +1,9 @@
 'use client';
 import { useEffect } from "react";
-import LoadingSpinner from "../../components/Loading";
 import { useRecentlyStore } from "../../store/recentlyStore";
 import { TopList } from "../TopList";
 import { fetchTopRecently } from "../../libs/fetchAPI";
+import LoadingSpinner from "../UI/Loading";
 
 export default function Recently() {
     const { recently, setRecently } = useRecentlyStore();

@@ -2,9 +2,9 @@
 
 import { useEffect } from "react";
 import { useArtistStore } from "../../store/artistStore";
-import LoadingSpinner from "../Loading";
 import { fetchTopArtist } from "../../libs/fetchAPI";
 import { TopList } from "../TopList";
+import LoadingSpinner from "../UI/Loading";
 
 export default function Genres() {
     const { topArtist, setTopArtist } = useArtistStore();

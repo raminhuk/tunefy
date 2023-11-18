@@ -1,9 +1,9 @@
 'use client';
 import { useEffect } from "react";
 import { useArtistStore } from "../../store/artistStore";
-import LoadingSpinner from "../../components/Loading";
 import { fetchTopArtist } from "../../libs/fetchAPI";
 import { TopList } from "../TopList";
+import LoadingSpinner from "../UI/Loading";
 
 export default function Artists() {
     const { topArtist, setTopArtist } = useArtistStore();

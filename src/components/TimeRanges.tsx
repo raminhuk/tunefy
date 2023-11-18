@@ -1,8 +1,6 @@
 'use client';
-
 import { useState } from "react";
 import { TimeRange } from "../@types/types";
-import { timeRangeName } from "../utils/timeRangeName";
 
 interface TimeRengesProps {
     handleTimeRangeChange: (time: TimeRange) => void

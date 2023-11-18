@@ -4,9 +4,10 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useTracksStore } from '../../store/tracksStore';
 import { TimeRange } from '../../@types/types';
 import { CreatePlaylist } from '../../components/CreatePaylist';
-import LoadingSpinner from '../../components/Loading';
 import { fetchTopTracks } from '../../libs/fetchAPI';
 import { TopList } from '../TopList';
+import LoadingSpinner from '../UI/Loading';
+import Wrapped from '../wrapped/ImageEditor';
 
 export default function Tracks() {
     const { topTracks, setTopTracks } = useTracksStore();
@@ -37,6 +38,7 @@ export default function Tracks() {
                 <>
                     <div className="max-w-5xl w-11/12 mx-auto lg:mt-8 mt-4">
                         <CreatePlaylist timeRange={timeRange}/>
+                        {/* <Wrapped timeRange={timeRange}/> */}
                         <div className="text-center max-w-7xl mx-auto">
                             <h1 className="font-semibold text-xl tracking-wider py-2 mb-2">Top Tracks</h1>
                         </div>
