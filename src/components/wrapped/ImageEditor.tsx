@@ -42,9 +42,9 @@ function Wrapped({ timeRange }: WrappedProps ) {
   return (
     <div>
         <Modal open={openModal} onClose={onClose}>
-            <div className="container mx-auto mt-8 text-center">
+            <div className="container mx-auto text-center">
                 <ThemeSelector onThemeChange={handleThemeChange} />
-                <ImageDisplay selectedTheme={selectedTheme} />
+                <ImageDisplay selectedTheme={selectedTheme} timeRange={timeRange}/>
             </div>
         </Modal>
           
