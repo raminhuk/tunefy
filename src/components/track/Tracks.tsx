@@ -38,7 +38,7 @@ export default function Tracks() {
                 <>
                     <div className="max-w-5xl w-11/12 mx-auto lg:mt-8 mt-4">
                         <CreatePlaylist timeRange={timeRange}/>
-                        <Wrapped timeRange={timeRange}/>
+                        {/* <Wrapped timeRange={timeRange}/> */}
                         <div className="text-center max-w-7xl mx-auto">
                             <h1 className="font-semibold text-xl tracking-wider py-2 mb-2">Top Tracks</h1>
                         </div>
