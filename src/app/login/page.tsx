@@ -3,6 +3,12 @@ import { useEffect } from 'react';
 import { getSpotifyAccessToken } from '../../auth/spotifyToken';
 import { useRouter } from 'next/navigation'
 import { ImSpinner2 } from 'react-icons/im';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Login - Tunefy',
+    description: 'Login - Access Your Account and Explore Exclusive Features',
+}
 
 const LoginPage = () => {
     const router = useRouter();

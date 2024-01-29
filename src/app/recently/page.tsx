@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import Recently from "../../components/recently/Recently";
 
 export const metadata: Metadata = {
-    title: 'Últimas Ouvidas - Tunefy',
-    description: 'As últimas ouvidas por você no Spotify',
+    title: 'Recently Listened - Tunefy',
+    description: 'The latest tracks listened to by you on Spotify',
 }
 
 export default function Page() {

@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import Tracks from "../../components/track/Tracks";
 
 export const metadata: Metadata = {
-    title: 'Top Músicas - Tunefy',
-    description: 'As mais ouvidas por você no Spotify',
+    title: 'Top Songs - Tunefy',
+    description: 'The most listened to by you on Spotify',
 }
 
 export default function Page() {

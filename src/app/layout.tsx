@@ -22,7 +22,7 @@ const roboto = Montserrat({
 
 export const metadata: Metadata = {
     title: 'Tunefy',
-    description: 'Tunefy',
+    description: 'Discover your top songs, artists, and genres on Tunefy, your personalized guide to the best of music on Spotify',
 }
 
 export default function RootLayout({

@@ -1,4 +1,10 @@
+import { Metadata } from "next";
 import NavBar from "../../components/UI/NavBar";
+
+export const metadata: Metadata = {
+    title: 'About - Tunefy',
+    description: 'The most listened to by you on Spotify',
+}
 
 export default function Page() {
     return (
