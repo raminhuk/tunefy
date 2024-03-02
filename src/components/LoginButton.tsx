@@ -15,7 +15,7 @@ const LoginButton = () => {
 
     return (
         <>
-            {user ? (
+            {(user && user.images[0]) ? (
                 <span>
                 <Link href="/tracks">
                 <button

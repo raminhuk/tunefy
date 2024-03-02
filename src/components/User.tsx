@@ -51,7 +51,7 @@ export default function User() {
             <div className="cursor-pointer z-10 relative rounded-full" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
                 <div className="flex rounded-full overflow-hidden items-center gap-3 text-xs bg-gradient-to-r from-customPink to-customBlue p-0.5">
                     <div className="lg:w-10 lg:h-10 w-8 h-8 rounded-full overflow-hidden">
-                        {user ? (
+                        {(user && user.images[0]) ? (
                             <Image
                                 src={user.images[0].url}
                                 alt={user.display_name}

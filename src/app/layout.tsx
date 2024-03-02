@@ -23,6 +23,24 @@ const roboto = Montserrat({
 export const metadata: Metadata = {
     title: 'Tunefy',
     description: 'Discover your top songs, artists, and genres on Tunefy, your personalized guide to the best of music on Spotify',
+    icons: {
+        icon: [
+            {
+                media: '(prefers-color-scheme: light)',
+                url: '/favicon.ico',
+                href: '/favicon.ico',
+            },
+            {
+                media: '(prefers-color-scheme: dark)',
+                url: '/favicon.ico',
+                href: '/favicon.ico',
+            },
+        ],
+    },
+    creator: 'Fabio J Raminhuk',
+    twitter: {
+        site: '@fabio_rmk',
+    },
 }
 
 export default function RootLayout({
