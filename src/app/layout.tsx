@@ -10,13 +10,9 @@ import GoogleAnalytics from '../components/analytics/GoogleAnalytics'
 
 export const GA_TRACKING_ID: string | undefined = process.env.NEXT_PUBLIC_GOOGLE_ID;
 
-const poppins = Poppins({
-    weight: ['200', '400', '600', '800'],
-    subsets: ['latin'],
-})
-
-const roboto = Montserrat({
-    weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
+const poppins = Poppins({ 
+    weight: ['300', '400', '500', '600', '700', '800', '900'],
+    style: ['normal', 'italic'],
     subsets: ['latin'],
 })
 
@@ -54,7 +50,7 @@ export default function RootLayout({
                 <GoogleAnalytics GA_MEASUREMENT_ID={GA_TRACKING_ID}/>
             )}
             <meta name="theme-color" content="#080010"/>
-            <body className={`min-h-screen ${roboto.className}`}>
+            <body className={`min-h-screen ${poppins.className}`}>
                 <ToastContainer />
                 <Header />
                 <div className="min-h-[calc(100vh_-_88px)]">
